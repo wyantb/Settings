@@ -1,0 +1,26 @@
+
+[ui]
+editor = vim
+username = Brian Wyant <wyantb@gmail.com>
+
+ssh = ssh -i "J:\Users\Brian\.ssh\id_rsa"
+
+[auth]
+#school.schemes = https
+#school.prefix = https://sse.se.rit.edu/hg/
+#school.username = bmw8952
+
+[extensions]
+mq =
+color =
+purge =
+#mercurial_keyring =
+fetch =
+
+[web]
+#allow_push = *
+#push_ssl = false
+
+[color]
+qseries.applied = magenta bold
+status.modified = magenta bold
