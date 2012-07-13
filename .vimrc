@@ -63,4 +63,7 @@ inoremap kj <Esc>
 nnoremap <CR> :nohls<CR>/<BS>
 
 " Show chars in place of normal tabs
-" set list listchars=tab:@~,trail:[
+set list listchars=tab:→\ ,trail:·
+
+" Consider
+" highlight SpecialKey term=standout ctermbg=yellow guibg=yellow
