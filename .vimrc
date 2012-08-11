@@ -67,3 +67,6 @@ set list listchars=tab:→\ ,trail:·
 
 " Consider
 " highlight SpecialKey term=standout ctermbg=yellow guibg=yellow
+
+" Helper for switching between active buffers
+nnoremap <C-i> :buffers<CR>:buffer<Space>
