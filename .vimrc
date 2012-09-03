@@ -70,3 +70,16 @@ set list listchars=tab:→\ ,trail:·
 
 " Helper for switching between active buffers
 nnoremap <C-i> :buffers<CR>:buffer<Space>
+
+" Scroll padding
+set scrolloff=5
+
+" Use Ctrl+L to swap rnu/nu
+function! g:ToggleNuMode()
+  if &nu == 1
+    set rnu
+  else
+    set nu
+  endif
+endfunction
+nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
