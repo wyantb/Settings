@@ -68,9 +68,6 @@ set list listchars=tab:→\ ,trail:·
 " Consider
 " highlight SpecialKey term=standout ctermbg=yellow guibg=yellow
 
-" Helper for switching between active buffers
-nnoremap <C-i> :buffers<CR>:buffer<Space>
-
 " Scroll padding
 set scrolloff=5
 
@@ -83,3 +80,6 @@ function! g:ToggleNuMode()
   endif
 endfunction
 nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
+
+" Navigation keys will wrap around lines
+set whichwrap+=<,>,h,l,[,]
