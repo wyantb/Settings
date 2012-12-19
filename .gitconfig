@@ -1,12 +1,16 @@
 [user]
-	name = Brian Wyant
-	email = wyantb@gmail.com
+  name = Brian Wyant
+  email = wyantb@gmail.com
+#  email = brian.wyant@oracle.com
 [alias]
+  ff = merge --ff-only
   co = checkout
   ci = commit
   st = status
   br = branch
+  sub = submodule
   hist = log --pretty=format:\"%h %ad | %d %s [%an]\" --graph --date=short
   hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
   type = cat-file -t
   dump = cat-file -p
+  tclean = clean -f -x -d --exclude 'node_modules'
