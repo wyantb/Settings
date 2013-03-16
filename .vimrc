@@ -4,6 +4,7 @@ filetype plugin on
 syntax on
 set number
 set hlsearch
+set nocompatible
 
 set undolevels=200
 
@@ -71,7 +72,7 @@ set list listchars=tab:→\ ,trail:·
 " Scroll padding
 set scrolloff=5
 
-" Use Ctrl+L to swap rnu/nu
+" Use Ctrl+p to swap rnu/nu
 function! g:ToggleNuMode()
   if &nu == 1
     set rnu
@@ -79,7 +80,10 @@ function! g:ToggleNuMode()
     set nu
   endif
 endfunction
-nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
+nnoremap <silent><Tab> :call g:ToggleNuMode()<cr>
 
 " Navigation keys will wrap around lines
 set whichwrap+=<,>,h,l,[,]
+
+" Helper for switching between active buffers
+nnoremap <C-N> :buffers<CR>:buffer<Space>
