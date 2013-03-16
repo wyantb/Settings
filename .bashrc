@@ -10,6 +10,7 @@ if [ -f ~/.aliases ]; then
 fi
 shopt -s expand_aliases
 
-export PATH=$PATH:~/progs/node/bin
-export PATH=$PATH:~/bin/fast-export
-export PATH=$PATH:~/.dropbox-dist
+if [ -f ~/.bash_startup ]; then
+    . ~/.bash_startup
+fi
+

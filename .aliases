@@ -4,12 +4,7 @@ if [ -f ~/.privaliases ]; then
 fi
 shopt -s expand_aliases
 
-alias sadd="ssh-add"
 alias cls="clear; ls"
-alias dbox="dropbox > /dev/null 2>&1 &"
-alias pipstart=". ~/repos/virtualenv/py2env/bin/activate"
-alias sboinc="sudo /sbin/service boinc-client start"
 alias dokill="sudo nginx -s stop"
-alias makesound="su -c 'modprobe snd-pcm-oss'"
 
 alias git-reset='git tclean; git reset --hard; git sub init; git sub update; git sub foreach --recursive "git tclean; git reset --hard; git sub init; git sub update; git-reset;";'
