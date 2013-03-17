@@ -3,16 +3,33 @@
 editor = vim
 username = Brian Wyant <wyantb@gmail.com>
 
-ssh = ssh -i "J:\Users\Brian\.ssh\id_rsa"
+ssh = ssh -i "/home/brian/.ssh/id_rsa"
+
+# Do everything by hand, they said, it'll be great, they said
+# (WARNING only use for experimentation, overrides config in [merge-tools] section)
+# http://mercurial.selenic.com/wiki/MergeToolConfiguration
+#merge = internal:merge
 
 [diff]
 git = 1
 
-[extdiff]
-cmd.kdiff3 =
-
 [merge-tools]
-kdiff3.args = $base $local $other -o $output
+
+# Meld!
+# Not sure how recent the --auto-merge stuff is; can always use meld straight from source
+#  git clone http://git.gnome.org/browse/meld
+#  See also: http://meldmerge.org/development.html
+meld.executable=/home/brian/repos/meld/bin/meld
+meld.gui=True
+
+# According to https://mail.gnome.org/archives/meld-list/2013-February/msg00016.html
+#  Either meld.premerge should be true, XOR --auto-merge should be used; not both
+#  I personally haven't seen any problems with using both, though, so...
+
+# premerge:     Use HG's internal:merge first, before passing off to the mergetool in question
+meld.premerge=True
+# --auto-merge: Let meld try and do some auto merging before passing it off to you, the user
+meld.args=--label='local' $local --label='merge' $base --label='other' $other -o $output --auto-merge
 
 [auth]
 #school.schemes = https
@@ -24,7 +41,6 @@ mq =
 color =
 purge =
 fetch =
-extdiff =
 #mercurial_keyring =
 graphlog =
 pager =
@@ -42,6 +58,7 @@ qseries.applied = magenta bold
 status.modified = magenta bold
 
 [alias]
-slog = log --template '{node|short} {date|shortdate} | ({branches}) {desc|strip|firstline} [{author|person}]\n'
-shortlog = log --template '{node|short} {date|shortdate} | ({branches}) {desc|strip|firstline} [{author|person}]\n'
+slog =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks}) {desc|strip|firstline} [{author|person}]\n'
+shortlog = log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks}) {desc|strip|firstline} [{author|person}]\n'
 hist = shortlog -G
+bm = bookmark
