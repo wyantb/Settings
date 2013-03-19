@@ -2,6 +2,7 @@
 [ui]
 editor = vim
 username = Brian Wyant <wyantb@gmail.com>
+#username = Brian Wyant <brian.wyant@oracle.com>
 
 ssh = ssh -i "/home/brian/.ssh/id_rsa"
 
@@ -26,7 +27,7 @@ meld.gui=True
 #  Either meld.premerge should be true, XOR --auto-merge should be used; not both
 #  I personally haven't seen any problems with using both, though, so...
 
-# premerge:     Use HG's internal:merge first, before passing off to the mergetool in question
+# premerge: Use HG's internal:merge first, before passing off to the mergetool in question
 meld.premerge=True
 # --auto-merge: Let meld try and do some auto merging before passing it off to you, the user
 meld.args=--label='local' $local --label='merge' $base --label='other' $other -o $output --auto-merge
@@ -44,21 +45,46 @@ fetch =
 #mercurial_keyring =
 graphlog =
 pager =
+rebase =
 
 [pager]
 pager = LESS='FRX' less
-attend = annotate, cat, diff, export, glog, log, qdiff, shortlog, slog, hist, status
+attend = annotate, cat, diff, export, glog, log, qdiff, shortlog, slog, hist, status, nlog, si, sall, head, incoming, outgoing
 
 [web]
-#allow_push = *
-#push_ssl = false
+allow_push = *
+push_ssl = false
 
 [color]
 qseries.applied = magenta bold
 status.modified = magenta bold
 
+[http_proxy]
+#host = hostallow
+#no = don't proxy here
+
 [alias]
-slog =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks}) {desc|strip|firstline} [{author|person}]\n'
-shortlog = log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks}) {desc|strip|firstline} [{author|person}]\n'
-hist = shortlog -G
+si = st -i -X node_modules -I .
+sall = st -A -X node_modules -I .
 bm = bookmark
+
+# History, history, history
+nlog = log --style=/home/brian/scripts/map-cmdline.nlog
+slog =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) {desc|strip|firstline} [{author|person}]\n'
+shortlog = log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) {desc|strip|firstline} [{author|person}]\n'
+hist = shortlog -G
+
+# Since patches aren't very good about merges, store our parent before pulling
+pullpatch = !$HG bookmark -f -r qparent PatchParent ; $HG qpop -a ; $HG pull ; $HG update
+pp = pullpatch
+
+prec = purge --all -X node_modules -I .
+prej = purge --all -I **/*.rej
+porig = purge --all -I **/*.orig
+pro = !$HG prej ; $HG porig
+
+# Have I mentioned I like patches?
+ql = qguard -l
+qg = qgoto
+qgg = qguard
+qpa = qpop -a

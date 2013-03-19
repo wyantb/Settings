@@ -17,11 +17,6 @@ endfunction
 command SpaceTab call SpaceTab()
 command TwoSpace call SpaceTab()
 
-" Do it manually to start
-set expandtab
-set ts=2
-set sw=2
-
 " Four spaces, not tabs, not 2, 4!
 function FourSpace()
   set expandtab
@@ -29,6 +24,11 @@ function FourSpace()
   set sw=4
 endfunction
 command FourSpace call FourSpace()
+
+" Do it manually to start
+set expandtab
+set ts=4
+set sw=4
 
 " So you want tabs, not spaces?
 function RealTab()
@@ -52,13 +52,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Better up/down on wrapped lines
+" Modified up/down on wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-" Easy way to <Esc>
-inoremap jk <Esc>
-inoremap kj <Esc>
 
 " Enter clears highlighted search
 nnoremap <CR> :nohls<CR>/<BS>
@@ -72,7 +68,7 @@ set list listchars=tab:→\ ,trail:·
 " Scroll padding
 set scrolloff=5
 
-" Use Ctrl+p to swap rnu/nu
+" Use Tab to swap rnu/nu
 function! g:ToggleNuMode()
   if &nu == 1
     set rnu
