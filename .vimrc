@@ -83,3 +83,8 @@ set whichwrap+=<,>,h,l,[,]
 
 " Helper for switching between active buffers
 nnoremap <C-N> :buffers<CR>:buffer<Space>
+
+" Start up pathogen
+execute pathogen#infect()
+" CtrlP  https://github.com/kien/ctrlp.vim
+
