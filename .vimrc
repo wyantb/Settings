@@ -1,4 +1,3 @@
-
 " The basics
 filetype plugin on
 syntax on
@@ -10,6 +9,9 @@ set undolevels=200
 
 " So you want spaces, not tabs?
 function SpaceTab()
+  set autoindent
+  set smartindent
+
   set expandtab
   set ts=2
   set sw=2
@@ -19,29 +21,39 @@ command TwoSpace call SpaceTab()
 
 " Four spaces, not tabs, not 2, 4!
 function FourSpace()
+  set autoindent
+  set smartindent
+
   set expandtab
   set ts=4
   set sw=4
 endfunction
 command FourSpace call FourSpace()
 
-" Do it manually to start
-set expandtab
-set ts=4
-set sw=4
-
 " So you want tabs, not spaces?
 function RealTab()
+  set autoindent
+  set smartindent
+
   set noexpandtab
   set ts=2
   set sw=2
 endfunction
 command RealTab call RealTab()
 
-" Do good things with newlines
-"  But only so good - see previous 4 functions
+function NoTab()
+  " Clear out the above automagic
+  set noai
+  set nosi
+endfunction
+command NoTab call NoTab()
+
+" Do it manually to start
 set autoindent
 set smartindent
+set expandtab
+set ts=4
+set sw=4
 
 " Delete indents, eol, start
 set bs=2
@@ -81,10 +93,17 @@ nnoremap <silent><Tab> :call g:ToggleNuMode()<cr>
 " Navigation keys will wrap around lines
 set whichwrap+=<,>,h,l,[,]
 
-" Helper for switching between active buffers
-nnoremap <C-N> :buffers<CR>:buffer<Space>
+highlight Folded ctermbg=darkgray ctermfg=yellow cterm=bold
 
 " Start up pathogen
 execute pathogen#infect()
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|reports)$',
+  \ 'file': '\v\.(exe|so|dll|class)$',
+  \ 'link': '',
+  \ }
+
 " CtrlP  https://github.com/kien/ctrlp.vim
+nnoremap <C-N> :CtrlPMixed<CR>
 

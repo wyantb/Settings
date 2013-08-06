@@ -4,7 +4,34 @@ if [ -f ~/.privaliases ]; then
 fi
 shopt -s expand_aliases
 
-alias cls="clear; ls"
-alias dokill="sudo nginx -s stop"
-
+alias cls='clear; ls'
+alias sadd='ssh-add'
+alias serve='sudo nginx'
+alias pc='sudo bash ~/scripts/portcheck.sh'
+alias ccadd="ccollab"
+alias ffpriv='firefox -new-instance -private &'
+alias killorig='find . -depth -name "*.orig" -type f -delete'
 alias git-reset='git tclean; git reset --hard; git sub init; git sub update; git sub foreach --recursive "git tclean; git reset --hard; git sub init; git sub update; git-reset;";'
+
+alias ns=notify-send
+
+hgpar() {
+    hg log -r "parents(max($1))" --template "{rev}"
+}
+alias hg-par=hgpar
+
+diff_spec() {
+    echo `hg log -r "parents(max($1))" --template "{rev}"`':'$1
+}
+alias dfs=diff_spec
+
+hg_diff_parent() {
+    hg diff --rev `dfs $1`
+}
+alias hgd=hg_diff_parent
+
+#Oracle's default DATE format is bad and should feel bad
+#alter session set nls_date_format = "YYYY-MM-DD HH24:MI:SS";
+#alter session set nls_timestamp_format = "YYYY-MM-DD HH24:MI:SS FF";
+#alter session set nls_timestamp_tz_format = "YYYY-MM-DD HH24:MI:SS TZH:TZM FF";
+

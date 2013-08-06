@@ -1,10 +1,9 @@
-
 [ui]
 editor = vim
 username = Brian Wyant <wyantb@gmail.com>
 #username = Brian Wyant <brian.wyant@oracle.com>
 
-ssh = ssh -i "/home/brian/.ssh/id_rsa"
+#ssh = ssh -i "/home/brian/.ssh/id_rsa"
 
 # Do everything by hand, they said, it'll be great, they said
 # (WARNING only use for experimentation, overrides config in [merge-tools] section)
@@ -32,6 +31,9 @@ meld.premerge=True
 # --auto-merge: Let meld try and do some auto merging before passing it off to you, the user
 meld.args=--label='local' $local --label='merge' $base --label='other' $other -o $output --auto-merge
 
+[merge-patterns]
+** = meld
+
 [auth]
 #school.schemes = https
 #school.prefix = https://sse.se.rit.edu/hg/
@@ -49,7 +51,7 @@ rebase =
 
 [pager]
 pager = LESS='FRX' less
-attend = annotate, cat, diff, export, glog, log, qdiff, shortlog, slog, hist, status, nlog, si, sall, head, incoming, outgoing
+attend = annotate, cat, diff, export, glog, log, qdiff, shortlog, slog, hist, status, nlog, si, sall, head, incoming, outgoing, heads, gdesc, desc
 
 [web]
 allow_push = *
@@ -67,15 +69,19 @@ status.modified = magenta bold
 si = st -i -X node_modules -I .
 sall = st -A -X node_modules -I .
 bm = bookmark
+br = branches
 
 # History, history, history
 nlog = log --style=/home/brian/scripts/map-cmdline.nlog
 slog =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) {desc|strip|firstline} [{author|person}]\n'
 shortlog = log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) {desc|strip|firstline} [{author|person}]\n'
-hist = shortlog -G
+desc =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) [{author|person}]\n    {desc|tabindent|tabindent}\n\n'
+gdesc =    log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) [{author|person}]\n    {desc|tabindent|tabindent}\n\n' -G
+#hist = shortlog -G
+hist = gdesc
 
-# Since patches aren't very good about merges, store our parent before pulling
-pullpatch = !$HG bookmark -f -r qparent PatchParent ; $HG qpop -a ; $HG pull ; $HG update
+# Since patches aren't very good about merges, store our parent and current patch before pulling
+pullpatch = !CurPatch=`hg qapplied | tail -1` && $HG bookmark -f -r qparent PatchParent && $HG qpop -a && $HG pull && $HG update && $HG qgoto $CurPatch && $HG qguard -l
 pp = pullpatch
 
 prec = purge --all -X node_modules -I .
@@ -88,3 +94,6 @@ ql = qguard -l
 qg = qgoto
 qgg = qguard
 qpa = qpop -a
+qpoop = qpop
+qpooop = qpop
+qpoooop = qpop
