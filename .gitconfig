@@ -31,3 +31,6 @@ algorithm = patience
 
 [core]
 editor = vim
+
+[push]
+default = simple
