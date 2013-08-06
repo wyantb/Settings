@@ -1,9 +1,20 @@
 " The basics
+filetype on
 filetype plugin on
+filetype indent on
 syntax on
 set number
-set hlsearch
 set nocompatible
+
+" Search stuffs
+set hlsearch    " highlight searches
+set incsearch   " do incremental searching
+set showmatch   " jump to matches when entering regexp
+set ignorecase  " ignore case when searching
+set smartcase   " no ignorecase if Uppercase char present
+
+set visualbell t_vb = " turn off error beep/flash
+set novisualbell      " turn off visual bell
 
 set undolevels=200
 
@@ -56,7 +67,8 @@ set ts=4
 set sw=4
 
 " Delete indents, eol, start
-set bs=2
+set backspace=indent,eol,start " make that backspace key work the way it should
+
 
 " Better window navigation
 nnoremap <C-h> <C-w>h
