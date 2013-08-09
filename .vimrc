@@ -20,6 +20,7 @@ set undolevels=200
 
 " So you want spaces, not tabs?
 function SpaceTab()
+  set nopaste
   set autoindent
   set smartindent
 
@@ -32,6 +33,7 @@ command TwoSpace call SpaceTab()
 
 " Four spaces, not tabs, not 2, 4!
 function FourSpace()
+  set nopaste
   set autoindent
   set smartindent
 
@@ -43,6 +45,7 @@ command FourSpace call FourSpace()
 
 " So you want tabs, not spaces?
 function RealTab()
+  set nopaste
   set autoindent
   set smartindent
 
@@ -53,9 +56,7 @@ endfunction
 command RealTab call RealTab()
 
 function NoTab()
-  " Clear out the above automagic
-  set noai
-  set nosi
+  set paste
 endfunction
 command NoTab call NoTab()
 
