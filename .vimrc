@@ -137,4 +137,11 @@ let g:ctrlp_custom_ignore = {
   \ }
 nnoremap <C-N> :CtrlPMixed<CR>
 
+" Experimental and various commands to remember
+
+command RemoveDups :g/^\(.*\)$\n\1$/d
+" :sort u - sorts all the lines in the current file
+"   http://vim.wikia.com/wiki/Uniq_-_Removing_duplicate_lines
+
+" vnew - opens a new buffer, vertically split from current one
 
