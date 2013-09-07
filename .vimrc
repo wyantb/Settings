@@ -14,10 +14,16 @@ set showmatch   " jump to matches when entering regexp
 set ignorecase  " ignore case when searching
 set smartcase   " no ignorecase if Uppercase char present
 
+" Enter clears highlighted search
+nnoremap <CR> :nohls<CR>/<BS>
+
 set visualbell t_vb = " turn off error beep/flash
 set novisualbell      " turn off visual bell
 
 set undolevels=200
+
+" Easier to access than the default \
+let mapleader = " "
 
 " So you want spaces, not tabs?
 function SpaceTab()
@@ -63,9 +69,8 @@ set softtabstop=4
 set ts=4
 set sw=4
 
-" Delete indents, eol, start
-set backspace=indent,eol,start " make that backspace key work the way it should
-
+" Make backspance handle everything it should
+set backspace=indent,eol,start
 
 " Better window navigation
 nnoremap <C-h> <C-w>h
@@ -76,9 +81,6 @@ nnoremap <C-l> <C-w>l
 " Modified up/down on wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-" Enter clears highlighted search
-nnoremap <CR> :nohls<CR>/<BS>
 
 " Show chars in place of normal tabs
 set list listchars=tab:→\ ,trail:·
@@ -121,21 +123,27 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 call neobundle#rc(expand('~/.vim/bundle/'))
-
 NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
-" Other plugins
+
+" Better basic syntax for javascript
 NeoBundle 'jelera/vim-javascript-syntax'
+
+" http://ternjs.net/ explains better than I can
+NeoBundle 'marijnh/tern_for_vim'
+nnoremap <Leader>g :TernDef<CR>
+nnoremap <Leader>r :TernRefs<CR>
+
+" CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
-
-filetype plugin indent on
-
-" CtrlP  https://github.com/kien/ctrlp.vim
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|reports)$',
   \ 'file': '\v\.(exe|so|dll|class)$',
   \ 'link': '',
   \ }
 nnoremap <C-N> :CtrlPMixed<CR>
+
+" Required by NeoBundle
+filetype plugin indent on
 
 " Experimental and various commands to remember
 
