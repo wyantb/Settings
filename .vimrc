@@ -22,6 +22,9 @@ set novisualbell      " turn off visual bell
 
 set undolevels=200
 
+" Highlights line#, underlines line @ cursor
+set cursorline
+
 " Easier to access than the default \
 let mapleader = " "
 
