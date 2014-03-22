@@ -32,6 +32,12 @@ meld.premerge=True
 meld.args=--label='local' $local --label='merge' $base --label='other' $other -o $output --auto-merge
 
 [merge-patterns]
+
+# Handy for stuff that's generated at build/compile time, as well as committed to source
+#  When it all fails, that's fine, just run "hg resolve [--all | -I '...'] -m" to mark them as
+#   resolved
+#EXAMPLE_PATTERN/*.html=internal:merge
+
 ** = meld
 
 [auth]
@@ -48,10 +54,11 @@ fetch =
 graphlog =
 pager =
 rebase =
+record =
 
 [pager]
 pager = LESS='FRX' less
-attend = annotate, cat, diff, export, glog, log, qdiff, shortlog, slog, hist, status, nlog, si, sall, head, incoming, outgoing, heads, gdesc, desc
+attend = annotate, cat, diff, export, glog, log, qdiff, shortlog, slog, hist, status, nlog, si, sall, head, incoming, outgoing, heads, gdesc, desc, ahist
 
 [web]
 allow_push = *
@@ -79,6 +86,10 @@ desc =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bo
 gdesc =    log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) [{author|person}]\n    {desc|tabindent|tabindent}\n\n' -G
 #hist = shortlog -G
 hist = gdesc
+ahist = gdesc --rev "ancestors(.)"
+
+open = !f(){ rev=`hg log --template="{node|short}" -l1 -r $1`; gnome-open $(hg paths default)/rev/$rev > /dev/null ; }; f
+copy = !f(){ rev=`hg log --template="{node|short}" -l1 -r $1`; echo $(hg paths default | sed -e 's/\/\/.*@/\/\//')/rev/$rev | xclip -selection clipboard ; }; f
 
 # Since patches aren't very good about merges, store our parent and current patch before pulling
 pullpatch = !CurPatch=`hg qapplied | tail -1` && $HG bookmark -f -r qparent PatchParent && $HG qpop -a && $HG pull && $HG update && $HG qgoto $CurPatch && $HG qguard -l

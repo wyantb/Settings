@@ -99,7 +99,9 @@ function! g:ToggleNuMode()
     set nu
   endif
 endfunction
-nnoremap <silent><Tab> :call g:ToggleNuMode()<cr>
+nnoremap <silent><Leader><Tab> :call g:ToggleNuMode()<cr>
+
+set foldmethod=manual
 
 " Navigation keys will wrap around lines
 set whichwrap+=<,>,h,l,[,]
@@ -121,6 +123,25 @@ set statusline+=\              " whitespace
 set statusline+=Lin:\ \%l\/\%L " line number/total
 set statusline+=\              " ends with whitespace
 
+" Better autocomplete
+"  http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+set completeopt=longest,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
+  \ '<C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" i_CTRL-J normally gives a newline; I don't care
+" i_CTRL_K normally inserts a digraph; I don't care
+" would prefer those for autocomplete in insert mode
+inoremap <expr> <C-j> "\<C-n>"
+inoremap <expr> <C-k> "\<C-p>"
+inoremap <expr> <C-j> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <C-k> pumvisible() ? '<C-p>' :
+  \ '<C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
 " Load NeoBundle - https://github.com/Shougo/neobundle.vim
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -136,14 +157,18 @@ NeoBundle 'marijnh/tern_for_vim'
 nnoremap <Leader>g :TernDef<CR>
 nnoremap <Leader>r :TernRefs<CR>
 
+NeoBundle 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+
 " CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|reports)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes)$',
   \ 'file': '\v\.(exe|so|dll|class)$',
   \ 'link': '',
   \ }
 nnoremap <C-N> :CtrlPMixed<CR>
+nnoremap <Leader>p :CtrlP<CR>
 
 " Required by NeoBundle
 filetype plugin indent on

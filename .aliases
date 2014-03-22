@@ -35,3 +35,6 @@ alias hgd=hg_diff_parent
 #alter session set nls_timestamp_format = "YYYY-MM-DD HH24:MI:SS FF";
 #alter session set nls_timestamp_tz_format = "YYYY-MM-DD HH24:MI:SS TZH:TZM FF";
 
+# Lets you do something like `command || err`
+alias err='notify-send "Build Failed"'
+

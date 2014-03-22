@@ -14,6 +14,7 @@ ci = commit
 st = status
 br = branch
 sub = submodule
+slog = log --pretty=format:\"%h %ad | %d %s [%an]\" --date=short
 hist = log --pretty=format:\"%h %ad | %d %s [%an]\" --graph --date=short
 hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
 type = cat-file -t
