@@ -28,9 +28,6 @@ set undolevels=200
 " Highlights line#, underlines line @ cursor
 set cursorline
 
-" Easier to access than the default \
-let mapleader = " "
-
 " So you want spaces, not tabs?
 function! SpaceTab()
   set nopaste

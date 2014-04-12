@@ -32,6 +32,10 @@ algorithm = patience
 
 [core]
 editor = vim
+excludesfile = ~/.dotfiles/.gitignore
 
 [push]
 default = simple
+
+[color]
+ui = true

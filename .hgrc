@@ -10,17 +10,13 @@ username = Brian Wyant <wyantb@gmail.com>
 # http://mercurial.selenic.com/wiki/MergeToolConfiguration
 #merge = internal:merge
 
-[diff]
-git = 1
-ignorews = yes
-
 [merge-tools]
 
 # Meld!
 # Not sure how recent the --auto-merge stuff is; can always use meld straight from source
 #  git clone http://git.gnome.org/browse/meld
 #  See also: http://meldmerge.org/development.html
-meld.executable=/home/brian/repos/meld/bin/meld
+#meld.executable=/home/brian/repos/meld/bin/meld
 meld.gui=True
 
 # According to https://mail.gnome.org/archives/meld-list/2013-February/msg00016.html
