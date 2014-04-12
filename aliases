@@ -1,9 +1,4 @@
 
-if [ -f ~/.privaliases ]; then
-    . ~/.privaliases
-fi
-shopt -s expand_aliases
-
 alias cls='clear; ls'
 alias sadd='ssh-add'
 alias serve='sudo nginx'

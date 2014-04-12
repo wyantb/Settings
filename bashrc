@@ -1,6 +1,6 @@
 
-if [ -f ~/.dotfiles/.aliases ]; then
-    . ~/.dotfiles/.aliases
+if [ -f ~/.dotfiles/aliases ]; then
+    . ~/.dotfiles/aliases
 fi
 shopt -s expand_aliases
 
