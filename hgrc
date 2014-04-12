@@ -76,7 +76,7 @@ bm = bookmark
 br = branches
 
 # History, history, history
-nlog = log --style=/home/brian/repos/Settings/map-cmdline.nlog
+nlog = log --style=$HOME/.dotfiles/map-cmdline.nlog
 slog =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) {desc|strip|firstline} [{author|person}]\n'
 shortlog = log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) {desc|strip|firstline} [{author|person}]\n'
 desc =     log --template '{rev}:{node|short} {date|shortdate} | ({branches} {bookmarks} {tags}) [{author|person}]\n    {desc|tabindent|tabindent}\n\n'
