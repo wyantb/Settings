@@ -3,9 +3,8 @@ set nocompatible
 syntax on
 set number
 
-" Colors!
-"  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
-color slate
+" Easier to access than the default \
+let mapleader = " "
 
 " Search stuffs
 set hlsearch    " highlight searches
@@ -16,6 +15,10 @@ set smartcase   " no ignorecase if Uppercase char present
 
 " Enter clears highlighted search
 nnoremap <CR> :nohls<CR>/<BS>
+
+" With enough plugins and macros, not redrawing while in progress really does
+" help
+set lazyredraw
 
 set visualbell t_vb = " turn off error beep/flash
 set novisualbell      " turn off visual bell
@@ -29,7 +32,7 @@ set cursorline
 let mapleader = " "
 
 " So you want spaces, not tabs?
-function SpaceTab()
+function! SpaceTab()
   set nopaste
   set autoindent
   set softtabstop=2
@@ -38,11 +41,11 @@ function SpaceTab()
   set ts=2
   set sw=2
 endfunction
-command SpaceTab call SpaceTab()
-command TwoSpace call SpaceTab()
+command! SpaceTab call SpaceTab()
+command! TwoSpace call SpaceTab()
 
 " Four spaces, not tabs, not 2, 4!
-function FourSpace()
+function! FourSpace()
   set nopaste
   set autoindent
   set softtabstop=4
@@ -51,10 +54,10 @@ function FourSpace()
   set ts=4
   set sw=4
 endfunction
-command FourSpace call FourSpace()
+command! FourSpace call FourSpace()
 
 " So you want tabs, not spaces?
-function RealTab()
+function! RealTab()
   set nopaste
   set autoindent
   set softtabstop=0
@@ -63,7 +66,7 @@ function RealTab()
   set ts=2
   set sw=2
 endfunction
-command RealTab call RealTab()
+command! RealTab call RealTab()
 
 " Do it manually to start
 set autoindent
@@ -151,14 +154,26 @@ NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
 
 " Better basic syntax for javascript
 NeoBundle 'jelera/vim-javascript-syntax'
+" And better indentation, highlighting
+NeoBundle 'pangloss/vim-javascript'
+
+" Syntax highlight for markdown files
+NeoBundle 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
 
 " http://ternjs.net/ explains better than I can
 NeoBundle 'marijnh/tern_for_vim'
 nnoremap <Leader>g :TernDef<CR>
 nnoremap <Leader>r :TernRefs<CR>
 
-NeoBundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
+" Allows for repeating of plugin movement keys (sneak, surround)
+NeoBundle 'tpope/vim-repeat'
+
+" A good medium range movement key (replaces 's')
+NeoBundle 'justinmk/vim-sneak'
+let g:sneak#streak = 1
+" nmap s :redr<CR><Plug>(SneakStreak)
+" nmap S :redr<CR><Plug>(SneakStreakBackward)
 
 " CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
@@ -167,15 +182,24 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|class)$',
   \ 'link': '',
   \ }
-nnoremap <C-N> :CtrlPMixed<CR>
-nnoremap <Leader>p :CtrlP<CR>
+
+" My colorscheme
+"  forked from: NeoBundle 'nielsmadan/harlequin'
+NeoBundle 'wyantb/harlequin'
+
+" Colors!
+"  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
+" color slate " what I used before 256 colors
+set t_Co=256
+set background=dark
+color harlequin-wyantb
 
 " Required by NeoBundle
 filetype plugin indent on
 
 " Experimental and various commands to remember
 
-command RemoveDups :g/^\(.*\)$\n\1$/d
+command! RemoveDups :g/^\(.*\)$\n\1$/d
 " :sort u - sorts all the lines in the current file
 "   http://vim.wikia.com/wiki/Uniq_-_Removing_duplicate_lines
 
