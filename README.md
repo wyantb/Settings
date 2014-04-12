@@ -1,6 +1,6 @@
 # My Configs
 
-## Using
+## Installing
 
 ```
 git clone git://github.com/wyantb/Settings.git ~/.dotfiles
@@ -10,5 +10,15 @@ ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/.profile ~/.profile
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.hgrc ~/.hgrc
+```
+
+## Uninstalling
+
+```
+rm ~/.vimrc
+rm ~/.tmux.conf
+rm ~/.profile
+rm ~/.gitconfig
+rm ~/.hgrc
 ```
 
