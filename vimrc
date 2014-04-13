@@ -91,15 +91,9 @@ set list listchars=tab:→\ ,trail:·
 " Scroll padding
 set scrolloff=5
 
-" Use Tab to swap rnu/nu
-function! g:ToggleNuMode()
-  if &nu == 1
-    set rnu
-  else
-    set nu
-  endif
-endfunction
-nnoremap <silent><Leader><Tab> :call g:ToggleNuMode()<cr>
+" Vim 7.4 combined nu/rnu behavior wins over toggling
+set number
+set relativenumber
 
 set foldmethod=manual
 
