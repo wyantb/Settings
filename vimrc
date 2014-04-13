@@ -205,3 +205,13 @@ command! RemoveDups :g/^\(.*\)$\n\1$/d
 
 " vnew - opens a new buffer, vertically split from current one
 
+" Inspired by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript
+" What do these two do?  Basically, type something such as {}, which should
+"  get content in the middle.  C-m and bam, spaced according to your normal
+"  indenting and has a semicolon after it.
+"  (Note: requires exact cursor placement)
+" Overrides...beginning a new line?  Don't care
+inoremap <C-m> <Esc>i<CR><Esc>A;<Esc>O
+" Overrides...going to normal mode?  Don't care
+inoremap <C-l> <Esc>i<CR><Esc>O
+
