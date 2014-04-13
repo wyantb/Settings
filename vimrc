@@ -204,8 +204,8 @@ command! RemoveDups :g/^\(.*\)$\n\1$/d
 "  get content in the middle.  C-m and bam, spaced according to your normal
 "  indenting and has a semicolon after it.
 "  (Note: requires exact cursor placement)
-" Overrides...beginning a new line?  Don't care
-inoremap <C-m> <Esc>i<CR><Esc>A;<Esc>O
+" Overrides...entering a digraph?  I may regret this someday
+inoremap <C-k> <Esc>i<CR><Esc>A;<Esc>O
 " Overrides...going to normal mode?  Don't care
 inoremap <C-l> <Esc>i<CR><Esc>O
 
