@@ -172,10 +172,13 @@ let g:sneak#streak = 1
 " nmap s :redr<CR><Plug>(SneakStreak)
 " nmap S :redr<CR><Plug>(SneakStreakBackward)
 
+" Replaces s with the 'surround' movement
+NeoBundle 'tpope/vim-surround'
+
 " CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist)$',
   \ 'file': '\v\.(exe|so|dll|class)$',
   \ 'link': '',
   \ }

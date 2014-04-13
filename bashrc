@@ -11,5 +11,6 @@ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
 
-[[ -s /home/brian/.nvm/nvm.sh ]] && . /home/brian/.nvm/nvm.sh
+[[ -s $HOME/.nvm/nvm.sh ]] && . /home/brian/.nvm/nvm.sh # Load NVM if present
+[[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Load RVM if present
 

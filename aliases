@@ -6,6 +6,9 @@ alias pc='sudo bash ~/scripts/portcheck.sh'
 alias ccadd="ccollab"
 alias ffpriv='firefox -new-instance -private &'
 alias killorig='find . -depth -name "*.orig" -type f -delete'
+
+# in my ~/.gitconfig in [alias] section:
+# tclean = clean -f -x -d --exclude 'node_modules'
 alias git-reset='git tclean; git reset --hard; git sub init; git sub update; git sub foreach --recursive "git tclean; git reset --hard; git sub init; git sub update; git-reset;";'
 
 # Adapted from http://superuser.com/a/39780

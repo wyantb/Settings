@@ -32,10 +32,32 @@ algorithm = patience
 
 [core]
 editor = vim
-excludesfile = ~/.dotfiles/.gitignore
+excludesfile = ~/.dotfiles/gitignore
+autocrlf = input
 
-[push]
-default = simple
+[merge]
+tool = kdiff3
+
+# Meld?
+# Not sure how recent the --auto-merge stuff is; can always use meld straight from source
+#  git clone http://git.gnome.org/browse/meld
+#  See also: http://meldmerge.org/development.html
+#tool = meld-custom
+#conflictstyle = diff3
+
+# Why a custom name?  See
+#  http://stackoverflow.com/questions/7435002/mergetool-from-gitconfig-being-ignored
+[mergetool "meld-custom"]
+
+# http://stackoverflow.com/questions/1251681/diff-tool-generates-unwanted-orig-files
+keepBackup = false
+
+path = /home/brian/repos/meld/bin/meld
+# --auto-merge: Let meld try and do some auto merging before passing it off to you, the user
+cmd = /home/brian/repos/meld/bin/meld --label='local' $LOCAL --label='merge' $BASE --label='other' $REMOTE -o $MERGED --auto-merge
 
 [color]
 ui = true
+
+[push]
+default = simple
