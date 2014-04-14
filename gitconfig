@@ -20,6 +20,7 @@ hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
 type = cat-file -t
 dump = cat-file -p
 tclean = clean -f -x -d --exclude 'node_modules'
+mer = "!bash -c 'git merge \"$0\" || git mergetool --no-prompt'"
 
 #From: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
 assume   = update-index --assume-unchanged

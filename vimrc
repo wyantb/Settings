@@ -173,7 +173,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist)$',
-  \ 'file': '\v\.(exe|so|dll|class)$',
+  \ 'file': '\v\.(exe|so|dll|class|orig|swp)$',
   \ 'link': '',
   \ }
 
