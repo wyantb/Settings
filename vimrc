@@ -169,6 +169,10 @@ let g:sneak#streak = 1
 " Replaces s with the 'surround' movement
 NeoBundle 'tpope/vim-surround'
 
+" A few small supplements to netrw
+"  Try '-', for example, to open to current file/dir in netrw
+NeoBundle 'tpope/vim-vinegar'
+
 " CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
