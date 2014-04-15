@@ -75,12 +75,6 @@ set sw=4
 " Make backspance handle everything it should
 set backspace=indent,eol,start
 
-" Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 " Modified up/down on wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -172,6 +166,9 @@ NeoBundle 'tpope/vim-surround'
 " A few small supplements to netrw
 "  Try '-', for example, to open to current file/dir in netrw
 NeoBundle 'tpope/vim-vinegar'
+
+" Ctrl-direction can navigate either vim or tmux splits
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
