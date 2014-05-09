@@ -111,31 +111,25 @@ set statusline+=\              " whitespace
 set statusline+=Lin:\ \%l\/\%L " line number/total
 set statusline+=\              " ends with whitespace
 
-" Better autocomplete
-"  http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-set completeopt=longest,menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
-  \ '<C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-" i_CTRL-J normally gives a newline; I don't care
-" i_CTRL_K normally inserts a digraph; I don't care
-" would prefer those for autocomplete in insert mode
-inoremap <expr> <C-j> "\<C-n>"
-inoremap <expr> <C-k> "\<C-p>"
-inoremap <expr> <C-j> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <C-k> pumvisible() ? '<C-p>' :
-  \ '<C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
 " Load NeoBundle - https://github.com/Shougo/neobundle.vim
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
+
+" Popup as you go autocomplete
+NeoBundle 'Valloric/YouCompleteMe'
+
+" Snippets, snippets, snippets
+NeoBundle 'SirVer/ultisnips'
+" Overrides...executing a command and returning to insert?  don't care
+let g:UltiSnipsExpandTrigger="<C-o>"
+let g:UltiSnipsJumpForwardTrigger="<C-o>"
+" This...somehow manages to avoid conflict with <BS>.  Sweetness.
+let g:UltiSnipsJumpBackwardTrigger="<C-h>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/.dotfiles/snippets"]
+
 
 " Better basic syntax for javascript
 NeoBundle 'jelera/vim-javascript-syntax'
@@ -200,13 +194,14 @@ command! RemoveDups :g/^\(.*\)$\n\1$/d
 
 " vnew - opens a new buffer, vertically split from current one
 
+" TODO these don't work.  Snippets instead?
 " Inspired by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript
 " What do these two do?  Basically, type something such as {}, which should
-"  get content in the middle.  C-m and bam, spaced according to your normal
+"  get content in the middle.  C-k and bam, spaced according to your normal
 "  indenting and has a semicolon after it.
 "  (Note: requires exact cursor placement)
 " Overrides...entering a digraph?  I may regret this someday
-inoremap <C-k> <Esc>i<CR><Esc>A;<Esc>O
+" inoremap <Ctrl-k> <Esc>i<CR><Esc>A;<Esc>O
 " Overrides...going to normal mode?  Don't care
-inoremap <C-l> <Esc>i<CR><Esc>O
+" inoremap <Ctrl-l> <Esc>i<CR><Esc>O
 
