@@ -66,3 +66,6 @@ ui = true
 
 [push]
 default = simple
+
+[mergetool]
+keepBackup = false
