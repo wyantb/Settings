@@ -19,8 +19,10 @@ hist = log --pretty=format:\"%h %ad | %d %s [%an]\" --graph --date=short
 hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
 type = cat-file -t
 dump = cat-file -p
-tclean = clean -f -x -d --exclude 'node_modules'
-mer = "!bash -c 'git merge \"$0\" || git mergetool --no-prompt'"
+tclean = clean -f -d
+mt = mergetool
+serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+rb = !git fetch && git ff
 
 #From: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
 assume   = update-index --assume-unchanged
@@ -38,6 +40,8 @@ autocrlf = input
 
 [merge]
 tool = kdiff3
+conflictstyle = diff3
+defaultToUpstream = true
 
 # Meld?
 # Not sure how recent the --auto-merge stuff is; can always use meld straight from source

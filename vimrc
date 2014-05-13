@@ -95,6 +95,10 @@ set scrolloff=5
 set number
 set relativenumber
 
+" And when we leave buffers, just keep the numbers absolute
+au BufEnter * set rnu
+au BufLeave * set nornu
+
 set foldmethod=manual
 
 " Navigation keys will wrap around lines
@@ -147,6 +151,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
 NeoBundle 'jelera/vim-javascript-syntax'
 " And better indentation, highlighting
 NeoBundle 'pangloss/vim-javascript'
+" Syntax for mustache too
+NeoBundle 'juvenn/mustache.vim'
 
 " Syntax highlight for markdown files
 NeoBundle 'plasticboy/vim-markdown'
@@ -168,6 +174,9 @@ let g:sneak#streak = 1
 
 " Replaces s with the 'surround' movement
 NeoBundle 'tpope/vim-surround'
+
+" I like :Gblame
+NeoBundle 'tpope/vim-fugitive'
 
 " CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
