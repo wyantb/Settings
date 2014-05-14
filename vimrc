@@ -197,7 +197,12 @@ filetype plugin indent on
 
 " Empty out trailing whitespace on save (nice w/ snippets that may introduce
 " spaces)
-autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :%s/\s\+$//e
+function! ClearWhitespace()
+    %s/\s\+$//e   " clear out whitespace (possibly moving cursor)
+    ''            " move cursor back to old pos
+:endfunction
+command! ClearWhitespace call ClearWhitespace()
+autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :call ClearWhitespace()
 
 " Experimental and various commands to remember
 
