@@ -130,9 +130,11 @@ NeoBundle 'SirVer/ultisnips'
 " Overrides...executing a command and returning to insert?  don't care
 let g:UltiSnipsExpandTrigger="<C-o>"
 let g:UltiSnipsJumpForwardTrigger="<C-o>"
+let g:UltiSnipsEditSplit="vertical"
 " This...somehow manages to avoid conflict with <BS>.  Sweetness.
 let g:UltiSnipsJumpBackwardTrigger="<C-h>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/.dotfiles/snippets"]
+let g:UltiSnipsSnippetsDir=$HOME."/.dotfiles/snippets"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.dotfiles/snippets"]
 
 
 " Better basic syntax for javascript
