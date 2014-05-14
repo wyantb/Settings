@@ -195,6 +195,10 @@ color harlequin-wyantb
 " Required by NeoBundle
 filetype plugin indent on
 
+" Empty out trailing whitespace on save (nice w/ snippets that may introduce
+" spaces)
+autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :%s/\s\+$//e
+
 " Experimental and various commands to remember
 
 command! RemoveDups :g/^\(.*\)$\n\1$/d
