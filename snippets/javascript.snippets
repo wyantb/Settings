@@ -3,3 +3,24 @@ _.each(${0:list}, function (${1:val}, ${2:key}) {
     ${3}
 });
 endsnippet
+
+snippet define
+define([$1], function ($2) {
+    'use strict';
+
+    $3
+});
+endsnippet
+
+snippet clzModule
+function $1($2) {
+    logger.assert(this && this instanceof $1, '$1 must be created with \'new\'');
+    $3
+}
+
+var ${4:proto} = $1.prototype;
+
+$5
+
+return $1;
+endsnippet
