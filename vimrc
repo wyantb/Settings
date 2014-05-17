@@ -197,14 +197,18 @@ color harlequin-wyantb
 " Required by NeoBundle
 filetype plugin indent on
 
-" Empty out trailing whitespace on save (nice w/ snippets that may introduce
+" Empty out trailing whitespace on save (nice w/ my snippets that may introduce
 " spaces)
-function! ClearWhitespace()
-    %s/\s\+$//e   " clear out whitespace (possibly moving cursor)
-    ''            " move cursor back to old pos
+function! TrimTrailingWhitespace()
+    " Remembering cursor location courtesy of
+    " http://unix.stackexchange.com/a/75438
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e       " clear out whitespace (possibly moving cursor)
+    call cursor(l, c) " and go back to original pos
 :endfunction
-command! ClearWhitespace call ClearWhitespace()
-autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :call ClearWhitespace()
+command! TrimTrailingWhitespace call TrimTrailingWhitespace()
+autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
 
 " Experimental and various commands to remember
 
