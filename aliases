@@ -15,7 +15,8 @@ alias git-reset='git tclean; git reset --hard; git sub init; git sub update; git
 alias inPath="echo $PATH | tr ':' '\n' | grep -x -c >/dev/null"
 alias countInPath="echo $PATH | tr ':' '\n' | grep -x -c"
 
-alias ns=notify-send
+alias morningRoutine="git fetch && tig --all --author-date-order --no-merges"
+alias mr=morningRoutine
 
 hgpar() {
     hg log -r "parents(max($1))" --template "{rev}"
