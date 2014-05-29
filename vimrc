@@ -115,6 +115,9 @@ set statusline+=\              " whitespace
 set statusline+=Lin:\ \%l\/\%L " line number/total
 set statusline+=\              " ends with whitespace
 
+" Reload vimrc
+map <Leader>v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloaded'"<CR>
+
 " Load NeoBundle - https://github.com/Shougo/neobundle.vim
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
