@@ -18,10 +18,8 @@ alias countInPath="echo $PATH | tr ':' '\n' | grep -x -c"
 alias morningRoutine="git fetch && tig --all --author-date-order --no-merges"
 alias mr=morningRoutine
 
-hgpar() {
-    hg log -r "parents(max($1))" --template "{rev}"
-}
-alias hg-par=hgpar
+# don't know why this happens...
+alias fixunity='unity --reset-icons &disown'
 
 #Oracle's default DATE format is bad and should feel bad
 #alter session set nls_date_format = "YYYY-MM-DD HH24:MI:SS";
