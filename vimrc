@@ -65,6 +65,8 @@ function! RealTab()
 endfunction
 command! RealTab call RealTab()
 
+command! FormatJSON %!python -m json.tool
+
 " Do it manually to start
 set autoindent
 set expandtab
@@ -74,10 +76,6 @@ set sw=4
 
 " Make backspance handle everything it should
 set backspace=indent,eol,start
-
-" Modified up/down on wrapped lines
-nnoremap j gj
-nnoremap k gk
 
 " Show chars in place of normal tabs
 set list listchars=tab:→\ ,trail:·
@@ -181,7 +179,7 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 " CtrlP - Awesome show-as-you-type file searching
 NeoBundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist|projects\/adminwar\/war)$',
   \ 'file': '\v\.(exe|so|dll|class|orig|swp)$',
   \ 'link': '',
   \ }

@@ -15,22 +15,11 @@ alias git-reset='git tclean; git reset --hard; git sub init; git sub update; git
 alias inPath="echo $PATH | tr ':' '\n' | grep -x -c >/dev/null"
 alias countInPath="echo $PATH | tr ':' '\n' | grep -x -c"
 
-alias ns=notify-send
+alias morningRoutine="git fetch && tig --all --author-date-order --no-merges"
+alias mr=morningRoutine
 
-hgpar() {
-    hg log -r "parents(max($1))" --template "{rev}"
-}
-alias hg-par=hgpar
-
-diff_spec() {
-    echo `hg log -r "parents(max($1))" --template "{rev}"`':'$1
-}
-alias dfs=diff_spec
-
-hg_diff_parent() {
-    hg diff --rev `dfs $1`
-}
-alias hgd=hg_diff_parent
+# don't know why this happens...
+alias fixunity='unity --reset-icons &disown'
 
 #Oracle's default DATE format is bad and should feel bad
 #alter session set nls_date_format = "YYYY-MM-DD HH24:MI:SS";
