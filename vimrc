@@ -65,6 +65,10 @@ function! RealTab()
 endfunction
 command! RealTab call RealTab()
 
+" syntax of these languages is fussy over tabs Vs spaces
+autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 command! FormatJSON %!python -m json.tool
 
 " Do it manually to start
