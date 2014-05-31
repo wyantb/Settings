@@ -3,17 +3,17 @@
 ## Installing
 
 ```
-git clone git://github.com/wyantb/Settings.git ~/.dotfiles
-echo "[[ -f ~/.dotfiles/bashrc ]] && . ~/.dotfiles/bashrc" >> ~/.bashrc
-ln -s ~/.dotfiles/vimrc ~/.vimrc
-ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/profile ~/.profile
-ln -s ~/.dotfiles/gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/hgrc ~/.hgrc
+git clone git://github.com/wyantb/Settings.git $HOME/.dotfiles
+echo "[[ -f $HOME/.dotfiles/bashrc ]] && . $HOME/.dotfiles/bashrc" >> $HOME/.bashrc
+ln -s $HOME/.dotfiles/vimrc $HOME/.vimrc
+ln -s $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
+ln -s $HOME/.dotfiles/profile $HOME/.profile
+ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig
+ln -s $HOME/.dotfiles/hgrc $HOME/.hgrc
 
 # NeoBundle, and getting it ready:
-mkdir -p ~/.vim/bundle
-git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+mkdir -p $HOME/.vim/bundle
+git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 vim -c NeoBundleInstall!
 ```
 
@@ -27,10 +27,10 @@ ln -s $HOME/.dotfiles/scripts/pre-push-tweet.py .git/hooks/pre-push
 ## Uninstalling
 
 ```
-rm ~/.vimrc
-rm ~/.tmux.conf
-rm ~/.profile
-rm ~/.gitconfig
-rm ~/.hgrc
+rm $HOME/.vimrc
+rm $HOME/.tmux.conf
+rm $HOME/.profile
+rm $HOME/.gitconfig
+rm $HOME/.hgrc
 ```
 
