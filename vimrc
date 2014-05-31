@@ -13,8 +13,8 @@ set showmatch   " jump to matches when entering regexp
 set ignorecase  " ignore case when searching
 set smartcase   " no ignorecase if Uppercase char present
 
-" Enter clears highlighted search
-nnoremap <CR> :nohls<CR>/<BS>
+" Clear highlighted search when redrawing screen, without moving cursor
+nnoremap <C-l> :nohls<CR><C-l>
 
 " Saving as sudo if I forget to start as sudo
 cmap w!! w !sudo tee > /dev/null %
