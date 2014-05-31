@@ -16,6 +16,13 @@ set smartcase   " no ignorecase if Uppercase char present
 " Enter clears highlighted search
 nnoremap <CR> :nohls<CR>/<BS>
 
+" Saving as sudo if I forget to start as sudo
+cmap w!! w !sudo tee > /dev/null %
+
+" Backup files in Vim have never helped me, only annoyed, disable them
+set nobackup
+set noswapfile
+
 " With enough plugins and macros, not redrawing while in progress really does
 " help
 set lazyredraw
