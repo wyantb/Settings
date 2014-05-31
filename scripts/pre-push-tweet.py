@@ -3,7 +3,6 @@
 import re
 import sys
 import subprocess
-from subprocess import Popen, PIPE, STDOUT
 
 remote = sys.argv[1]
 if (remote != "origin"):
@@ -37,11 +36,16 @@ tweet_message = "Pushing " + str(len(joined_subjects)) + " commits to " + pushin
 
 print "Pushed to existing branch " + pushing_to + ", details copied to clipboard"
 
-p = Popen(['xclip', '-se', 'c'], stdin=PIPE)
-p.communicate(tweet_message)
-p.stdin.close()
-try:
-    p.terminate()
-except OSError:
-    pass
+# Fairly robust paste, from http://stackoverflow.com/a/7606100
+def paste(str, p=True, c=True):
+    from subprocess import Popen, PIPE
+
+    if p:
+        p = Popen(['xsel', '-pi'], stdin=PIPE)
+        p.communicate(input=str)
+    if c:
+        p = Popen(['xsel', '-bi'], stdin=PIPE)
+        p.communicate(input=str)
+
+paste(tweet_message)
 
