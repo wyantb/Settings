@@ -37,7 +37,7 @@ tweet_message = "Pushing " + str(len(joined_subjects)) + " commits to " + pushin
 print "Pushed to existing branch " + pushing_to + ", details copied to clipboard"
 
 # Fairly robust paste, from http://stackoverflow.com/a/7606100
-def paste(str, p=True, c=True):
+def paste(str):
     from subprocess import Popen, PIPE
     p = Popen(['xsel', '-pbi'], stdin=PIPE)
     p.communicate(input=str)
