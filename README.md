@@ -17,6 +17,13 @@ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 vim -c NeoBundleInstall!
 ```
 
+### Hooks for a given repo
+
+```
+# Puts details of commits about to be pushed into sys clipboard
+ln -s $HOME/.dotfiles/scripts/pre-push-tweet.py .git/hooks/pre-push
+```
+
 ## Uninstalling
 
 ```
