@@ -43,9 +43,21 @@ def paste(str, p=True, c=True):
     if p:
         p = Popen(['xsel', '-pi'], stdin=PIPE)
         p.communicate(input=str)
+        p.poll()
+        p.stdin.close()
+        try:
+            p.kill()
+        except OSError:
+            pass
     if c:
         p = Popen(['xsel', '-bi'], stdin=PIPE)
         p.communicate(input=str)
+        p.poll()
+        p.stdin.close()
+        try:
+            p.kill()
+        except OSError:
+            pass
 
 paste(tweet_message)
 
