@@ -40,4 +40,8 @@ print "Pushed to existing branch " + pushing_to + ", details copied to clipboard
 p = Popen(['xclip', '-se', 'c'], stdin=PIPE)
 p.communicate(tweet_message)
 p.stdin.close()
+try:
+    p.terminate()
+except OSError:
+    pass
 
