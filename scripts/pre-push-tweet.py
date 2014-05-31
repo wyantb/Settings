@@ -2,6 +2,7 @@
 
 import subprocess
 
+# TODO could fail if on an unnamed branch.  Probably want to skip this script if that happens
 branch = subprocess.check_output(["git", "symbolic-ref", "HEAD"]).replace("refs/heads/", "").strip()
 print "Pushing to branch: " + branch
 
