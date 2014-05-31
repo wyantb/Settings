@@ -41,19 +41,19 @@ def paste(str, p=True, c=True):
     from subprocess import Popen, PIPE
 
     if p:
-        p = Popen(['xsel', '-pi'], stdin=PIPE)
+        p = Popen(['xsel', '-pi', '-t', '0'], stdin=PIPE)
         p.communicate(input=str)
-        p.poll()
         p.stdin.close()
+        p.poll()
         try:
             p.kill()
         except OSError:
             pass
     if c:
-        p = Popen(['xsel', '-bi'], stdin=PIPE)
+        p = Popen(['xsel', '-bi', '-t', '0'], stdin=PIPE)
         p.communicate(input=str)
-        p.poll()
         p.stdin.close()
+        p.poll()
         try:
             p.kill()
         except OSError:
