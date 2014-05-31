@@ -4,8 +4,13 @@ import sys
 import subprocess
 from subprocess import Popen, PIPE, STDOUT
 
-# TODO could fail if on an unnamed branch.  Probably want to skip this script if that happens
-branch = subprocess.check_output(["git", "symbolic-ref", "HEAD"]).replace("refs/heads/", "").strip()
+get_branch_command = ["git", "symbolic-ref", "HEAD"]
+is_on_branch = subprocess.call(get_branch_command)
+if (is_on_branch != 0):
+    print "Detached head; skipping pre-push-tweet.py"
+    sys.exit(0)
+
+branch = subprocess.check_output(get_branch_command).replace("refs/heads/", "").strip()
 print "Pushing to branch: " + branch
 
 push_spec = "origin/" + branch + ".." + branch
