@@ -17,14 +17,14 @@ if (len(push_details) == 0):
 
 push_specs = push_details[0].strip().split(" ") # TODO I suppose I could push more than one at once...
 # also, 0 === local_ref e.g. refs/heads/master
+local_sha = push_specs[1]
 remote_sha = push_specs[3]
 re_empty_ref = re.compile("^0*$")
-pushing_to_new_branch = re_empty_ref.match(remote_sha) != None
-if (pushing_to_new_branch):
-    print "Pushing to a new branch, nothing to copy to clipboard"
+check_empty_shas = (re_empty_ref.match(local_sha) != None) or (re_empty_ref.match(remote_sha) != None)
+if (check_empty_shas):
+    print "Pushing to a new branch or deleting a branch, nothing to copy to clipboard"
     sys.exit(0)
 
-local_sha = push_specs[1]
 remote_ref = push_specs[2]
 pushing_to = remote_ref.replace("refs/heads/", "")
 
