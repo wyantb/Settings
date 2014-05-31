@@ -39,25 +39,8 @@ print "Pushed to existing branch " + pushing_to + ", details copied to clipboard
 # Fairly robust paste, from http://stackoverflow.com/a/7606100
 def paste(str, p=True, c=True):
     from subprocess import Popen, PIPE
-
-    if p:
-        p = Popen(['xsel', '-pi', '-t', '0'], stdin=PIPE)
-        p.communicate(input=str)
-        p.stdin.close()
-        p.poll()
-        try:
-            p.kill()
-        except OSError:
-            pass
-    if c:
-        p = Popen(['xsel', '-bi', '-t', '0'], stdin=PIPE)
-        p.communicate(input=str)
-        p.stdin.close()
-        p.poll()
-        try:
-            p.kill()
-        except OSError:
-            pass
+    p = Popen(['xsel', '-pbi'], stdin=PIPE)
+    p.communicate(input=str)
 
 paste(tweet_message)
 
