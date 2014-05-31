@@ -18,6 +18,9 @@ alias countInPath="echo $PATH | tr ':' '\n' | grep -x -c"
 alias morningRoutine="git fetch && tig --all --author-date-order --no-merges"
 alias mr=morningRoutine
 
+alias killxsel="pkill -c xsel"
+alias kx=killxsel
+
 # don't know why this happens...
 alias fixunity='unity --reset-icons &disown'
 
