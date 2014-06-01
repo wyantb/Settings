@@ -40,7 +40,6 @@ function! SpaceTab()
   set nopaste
   set autoindent
   set softtabstop=2
-
   set expandtab
   set ts=2
   set sw=2
@@ -53,7 +52,6 @@ function! FourSpace()
   set nopaste
   set autoindent
   set softtabstop=4
-
   set expandtab
   set ts=4
   set sw=4
@@ -65,7 +63,6 @@ function! RealTab()
   set nopaste
   set autoindent
   set softtabstop=0
-
   set noexpandtab
   set ts=2
   set sw=2
@@ -126,6 +123,11 @@ set statusline+=\              " ends with whitespace
 
 " Reload vimrc
 map <Leader>v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloaded'"<CR>
+
+" Somewhat destructive, but I don't use marks, so I think I can afford making
+" jumps to marks a little bit more keypress to get to
+nnoremap ' :
+nnoremap <Leader>' '
 
 " Load NeoBundle - https://github.com/Shougo/neobundle.vim
 if has('vim_starting')
