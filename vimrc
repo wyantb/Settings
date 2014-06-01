@@ -14,7 +14,7 @@ set ignorecase  " ignore case when searching
 set smartcase   " no ignorecase if Uppercase char present
 
 " Clear highlighted search when redrawing screen, without moving cursor
-nnoremap <C-l> :nohls<CR><C-l>
+nnoremap <CR> :nohls<CR>
 
 " Saving as sudo if I forget to start as sudo
 cmap w!! w !sudo tee > /dev/null %
