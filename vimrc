@@ -129,6 +129,17 @@ map <Leader>v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloa
 nnoremap ' :
 nnoremap <Leader>' '
 
+" Make yank behavior more consistent with D, C
+map Y y$
+
+" Undo all changes to one line...why?  Try to map to something useful
+nmap U <nop>
+
+" I have never used Ex mode, and likely never will.  Type in commands with no
+" feedback?  Try to map to something useful.
+nmap Q <nop>
+nmap gQ <nop>
+
 " Load NeoBundle - https://github.com/Shougo/neobundle.vim
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
