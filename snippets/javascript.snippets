@@ -24,3 +24,13 @@ $5
 
 return $1;
 endsnippet
+
+snippet exclude
+//>>excludeStart("${2:validation}", pragmas.production)
+$1
+//>>excludeEnd("$2")
+endsnippet
+
+snippet loggerWarn
+logger.warn('$1');
+endsnippet
