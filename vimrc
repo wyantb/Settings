@@ -129,6 +129,8 @@ map <Leader>v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloa
 nnoremap ' :
 nnoremap <Leader>' '
 
+nnoremap <Leader>m @@
+
 " Make yank behavior more consistent with D, C
 map Y y$
 
@@ -160,7 +162,6 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 let g:UltiSnipsSnippetsDir=$HOME."/.dotfiles/snippets"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.dotfiles/snippets"]
-
 
 " Better basic syntax for javascript
 NeoBundle 'jelera/vim-javascript-syntax'
@@ -212,6 +213,17 @@ let g:ctrlp_custom_ignore = {
 "  forked from: NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'wyantb/harlequin'
 
+" Let's make custom text objects
+NeoBundle 'kana/vim-textobj-user'
+
+" da/ seems handy enough, yes?
+call textobj#user#plugin('commentblock', {
+            \   'commentblock': {
+            \     'pattern': '\/\*\_.\{-}\*\/',
+            \     'select': ['a/', 'i/']
+            \   }
+            \ })
+
 " Colors!
 "  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
 " color slate " what I used before 256 colors
@@ -240,17 +252,4 @@ autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :ca
 command! RemoveDups :g/^\(.*\)$\n\1$/d
 " :sort u - sorts all the lines in the current file
 "   http://vim.wikia.com/wiki/Uniq_-_Removing_duplicate_lines
-
-" vnew - opens a new buffer, vertically split from current one
-
-" TODO these don't work.  Snippets instead?
-" Inspired by http://oli.me.uk/2013/06/29/equipping-vim-for-javascript
-" What do these two do?  Basically, type something such as {}, which should
-"  get content in the middle.  C-k and bam, spaced according to your normal
-"  indenting and has a semicolon after it.
-"  (Note: requires exact cursor placement)
-" Overrides...entering a digraph?  I may regret this someday
-" inoremap <Ctrl-k> <Esc>i<CR><Esc>A;<Esc>O
-" Overrides...going to normal mode?  Don't care
-" inoremap <Ctrl-l> <Esc>i<CR><Esc>O
 
