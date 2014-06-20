@@ -167,7 +167,7 @@ NeoBundle 'jelera/vim-javascript-syntax'
 " And better indentation, highlighting
 NeoBundle 'pangloss/vim-javascript'
 " Syntax for mustache too
-NeoBundle 'juvenn/mustache.vim'
+NeoBundle 'mustache/vim-mustache-handlebars'
 
 " Syntax highlight for markdown files
 NeoBundle 'plasticboy/vim-markdown'
