@@ -222,6 +222,8 @@ NeoBundle 'glts/vim-textobj-comment'
 NeoBundle 'lucapette/vim-textobj-underscore'
 " i, a, for function params
 NeoBundle 'sgur/vim-textobj-parameter'
+" i/ a/ for the last search (remember dot formula: n. n. n.)
+NeoBundle 'kana/vim-textobj-lastpat'
 
 " Colors!
 "  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
