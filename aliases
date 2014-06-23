@@ -3,7 +3,7 @@ alias cls='clear; ls'
 alias sadd='ssh-add'
 alias serve='sudo nginx'
 alias pc='sudo bash ~/scripts/portcheck.sh'
-alias ccadd="ccollab"
+alias ccadd="ccollab addgitdiffs"
 alias ffpriv='firefox -new-instance -private &'
 alias killorig='find . -depth -name "*.orig" -type f -delete'
 
