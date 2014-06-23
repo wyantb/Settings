@@ -220,7 +220,7 @@ NeoBundle 'kana/vim-textobj-user'
 call textobj#user#plugin('commentblock', {
             \   'commentblock': {
             \     'pattern': '\/\*\_.\{-}\*\/',
-            \     'select': ['a/', 'i/']
+            \     'select': ['ic']
             \   }
             \ })
 
