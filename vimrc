@@ -216,13 +216,12 @@ NeoBundle 'wyantb/harlequin'
 " Let's make custom text objects
 NeoBundle 'kana/vim-textobj-user'
 
-" da/ seems handy enough, yes?
-call textobj#user#plugin('commentblock', {
-            \   'commentblock': {
-            \     'pattern': '\/\*\_.\{-}\*\/',
-            \     'select': ['a/', 'i/']
-            \   }
-            \ })
+" try: cic, dac, daC (aC includes whitespace)
+NeoBundle 'glts/vim-textobj-comment'
+" try: ci_, da_
+NeoBundle 'lucapette/vim-textobj-underscore'
+" i, a, for function params
+NeoBundle 'sgur/vim-textobj-parameter'
 
 " Colors!
 "  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
