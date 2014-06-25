@@ -127,7 +127,9 @@ map <Leader>v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloa
 " Somewhat destructive, but I don't use marks, so I think I can afford making
 " jumps to marks a little bit more keypress to get to
 nnoremap ' :
+vnoremap ' :
 nnoremap <Leader>' '
+vnoremap <Leader>' '
 
 nnoremap <Leader>m @@
 
