@@ -224,6 +224,8 @@ NeoBundle 'lucapette/vim-textobj-underscore'
 NeoBundle 'sgur/vim-textobj-parameter'
 " i/ a/ for the last search (remember dot formula: n. n. n.)
 NeoBundle 'kana/vim-textobj-lastpat'
+" ie ae for whole buffer - hey, ya never know...
+NeoBundle 'kana/vim-textobj-entire'
 
 " Colors!
 "  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
