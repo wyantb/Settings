@@ -256,3 +256,22 @@ command! RemoveDups :g/^\(.*\)$\n\1$/d
 " :sort u - sorts all the lines in the current file
 "   http://vim.wikia.com/wiki/Uniq_-_Removing_duplicate_lines
 
+" From Salman: e.g. gpi' replaces contents of quote with sys clipboard
+function! PasteOverMotion( type )
+  let command = ":\<c-u>set paste\<cr>gv\"_c\<c-r>+\<esc>:set nopaste\<cr>"
+  if ( len( a:type ) == 1 )
+    silent execute "normal! " . command
+  else
+    if ( a:type == 'line' )
+      silent execute "normal! '[V']" . command
+    elseif ( a:type == 'block' )
+      " This is not likely as it can only happen from visual mode, for which the mapping isn't defined anyway
+      silent execute "normal! `[\<c-v>`]" . command
+    else
+      silent exe "normal! `[v`]" . command
+    endif
+  endif
+endfunction
+nmap <silent> gp :set opfunc=PasteOverMotion<cr>g@
+vmap <silent> gp :<c-u>call PasteOverMotion( visualmode() )<CR>
+
