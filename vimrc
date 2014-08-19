@@ -258,7 +258,11 @@ command! RemoveDups :g/^\(.*\)$\n\1$/d
 " :sort u - sorts all the lines in the current file
 "   http://vim.wikia.com/wiki/Uniq_-_Removing_duplicate_lines
 
-" From Salman: e.g. gpi' replaces contents of quote with sys clipboard
+" --------------------------------------------------------------------
+" From Salman: possibly experimental/stuff I don't actually want to use
+" --------------------------------------------------------------------
+
+" e.g. gpi' replaces contents of quote with sys clipboard
 function! PasteOverMotion( type )
   let command = ":\<c-u>set paste\<cr>gv\"_c\<c-r>+\<esc>:set nopaste\<cr>"
   if ( len( a:type ) == 1 )
@@ -275,5 +279,41 @@ function! PasteOverMotion( type )
   endif
 endfunction
 nmap <silent> gp :set opfunc=PasteOverMotion<cr>g@
-vmap <silent> gp :<c-u>call PasteOverMotion( visualmode() )<CR>
+vmap <silent> gp :<c-u>call PasteOverMotion( visualmode() )<CR" Escapes the input string so it's safe for use in a search.
 
+" For example:  echo MakeSafeForSearch( 'a b[]' ) results in 'a\_s\+b\[\]' (without the quotes).
+function! MakeSafeForSearch( input )
+  return substitute( escape( a:input, '$*^[]~\/.' ), '\_s\+', '\\_s\\+', 'g' )
+endfunction
+
+" Sets the search register and adds the value that was set to the search command's history.
+function! SetSearchRegister( value )
+  let @/ = a:value
+  call histadd( '/', a:value )
+  call HighlightSearchResults()
+endfunction
+
+" This is a function that will turn on the highlighting of search results IF 'hlsearch' is set but temporarily disabled through a call to :nohlsearch.
+" May 24, 2011: it doesn't actually work... Can't really be done from a function, apparently, though a command can.
+function! HighlightSearchResults()
+  if ( &hlsearch )
+    set hlsearch
+  endif
+endfunction
+
+" Defines an operator (<Leader>/) that will search for the specified text.
+function! SetSearch( type )
+  let saveZ      = @z
+  if a:type == 'line'
+    '[,']yank z
+  elseif a:type == 'block'
+    " This is not likely as it can only happen from visual mode, for which the mapping isn't defined anyway
+    execute "normal! `[\<c-v>`]\"zy"
+  else
+    normal! `[v`]"zy
+  endif
+  call SetSearchRegister( MakeSafeForSearch( @z ) )
+  let @z = saveZ
+  set hlsearch
+endfunction
+nnoremap <leader>/ :set opfunc=SetSearch<cr>g@
