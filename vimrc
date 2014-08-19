@@ -265,6 +265,33 @@ command! RemoveDups :g/^\(.*\)$\n\1$/d
 " From Salman: possibly experimental/stuff I don't actually want to use
 " --------------------------------------------------------------------
 
+" Returns a dictionary that can be passed to functions#RestoreMarks to restore the specified marks. For example, calling with "<>" can be used to save and
+" restore the visual mode marks.
+"
+" Unused marks return [ 0, 0, 0, 0 ] which will delete them when next passed to functions#RestoreMarks, which seems correct. To ignore unused marks, pass in 1
+" for the optional argument. Note that ignoring unused marks will not delete them when they are next restored.
+function! SaveMarks( marks, ... )
+  let marks             = substitute( a:marks, '\s\+', '', 'g' )
+  let ignoreUnusedMarks = exists( "a:1" ) ? a:1 : 0
+  let result = {}
+  let i      = 0
+  while ( i < len( marks ) )
+    let mark    = marks[ i ]
+    let markPos = getpos( "'" . mark )
+    if ( !ignoreUnusedMarks || markPos != [ 0, 0, 0, 0 ] )
+      let result[ mark ] = getpos( "'" . mark )
+    endif
+    let i += 1
+  endwhile
+  return result
+endfunction
+function! RestoreMarks( markDictionary )
+  for mark in keys( a:markDictionary )
+    let coordinates = a:markDictionary[ mark ]
+    call setpos( "'" . mark, coordinates )
+  endfor
+endfunction
+
 " e.g. gpi' replaces contents of quote with sys clipboard
 function! PasteOverMotion( type )
   let command = ":\<c-u>set paste\<cr>gv\"_c\<c-r>+\<esc>:set nopaste\<cr>"
@@ -307,6 +334,7 @@ endfunction
 " Defines an operator (<Leader>/) that will search for the specified text.
 function! SetSearch( type )
   let saveZ      = @z
+  let savedMarks = SaveMarks('<>')
   if a:type == 'line'
     '[,']yank z
   elseif a:type == 'block'
@@ -317,7 +345,7 @@ function! SetSearch( type )
   endif
   call SetSearchRegister( MakeSafeForSearch( @z ) )
   let @z = saveZ
-  set hlsearch
+  call RestoreMarks(savedMarks)
 endfunction
 nnoremap <leader>/ :set opfunc=SetSearch<cr>g@
 
