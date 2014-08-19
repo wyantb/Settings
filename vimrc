@@ -325,6 +325,8 @@ endfunction
 
 " This is a function that will turn on the highlighting of search results IF 'hlsearch' is set but temporarily disabled through a call to :nohlsearch.
 " May 24, 2011: it doesn't actually work... Can't really be done from a function, apparently, though a command can.
+"   See |autocmd-searchpat| I think?  :nohls doesn't play well with this, but
+"   if you just have a key that toggles like set hls!, it works out.
 function! HighlightSearchResults()
   if ( &hlsearch )
     set hlsearch
