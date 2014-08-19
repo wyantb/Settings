@@ -25,6 +25,12 @@ $5
 return $1;
 endsnippet
 
+snippet throwerror
+var message = '$1';
+logger.fatal(message);
+throw new Error(message);
+endsnippet
+
 snippet excludeValidation
 //>>excludeStart("${2:validation}", pragmas.production)
 $1
@@ -33,4 +39,12 @@ endsnippet
 
 snippet loggerWarn
 logger.warn('$1');
+endsnippet
+
+snippet qunitok
+ok($1${2:, '$3'});
+endsnippet
+
+snippet qunitstrequal
+strictEqual($1, $2${3:, '$4'});
 endsnippet
