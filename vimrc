@@ -151,6 +151,9 @@ endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
 
+" Comment things out, e.g. with gcc motion
+NeoBundle 'tpope/vim-commentary'
+
 " Popup as you go autocomplete
 NeoBundle 'Valloric/YouCompleteMe'
 
