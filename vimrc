@@ -322,18 +322,12 @@ endfunction
 nnoremap <leader>/ :set opfunc=SetSearch<cr>g@
 
 " Sometimes, you want to copy/paste code for people, that's indented.  Use
-" this - <Leader>y - instead of "+y, to include in the clipboard the text with
+" this - <Leader>y / <Leader>Y - instead of "+y, to include in the clipboard the text with
 " common whitespace stripped (bonus: less characters to type)
-function! CopyWithoutIndent( type )
-  if ( len( a:type ) == 1 )
-    let lineStart = line( "'<" )
-    let lineEnd   = line( "'>" )
-  else
-    let lineStart = line( "'[" )
-    let lineEnd   = line( "']" )
-  endif
-  let lowIndent = indent( lineStart )
-  for i in range( lineStart + 1, lineEnd )
+
+function! GetLinesWithoutIndent( start, end )
+  let lowIndent = indent( a:start )
+  for i in range( a:start + 1, a:end )
     " Ignore completely blank lines.
     if ( getline( i ) =~ '^\s*$' )
       continue
@@ -343,12 +337,43 @@ function! CopyWithoutIndent( type )
     endif
   endfor
   let result = []
-  for i in range( lineStart, lineEnd )
+  for i in range( a:start, a:end )
     call add( result, substitute( getline( i ), '^ \{' . lowIndent . '}', '', '' ) )
   endfor
+  return result
+endfunction
+
+function! CopyWithoutIndent( type )
+  if ( len( a:type ) == 1 )
+    let lineStart = line( "'<" )
+    let lineEnd   = line( "'>" )
+  else
+    let lineStart = line( "'[" )
+    let lineEnd   = line( "']" )
+  endif
+  let result = GetLinesWithoutIndent( lineStart, lineEnd )
   let @+ = join( result, "\<NL>" )
 endfunction
-"nmap <silent> gy :set opfunc=CopyWithoutIndent<cr>g@
-"vmap <silent> gy :<c-u>call CopyWithoutIndent( visualmode() )<CR>
 nmap <silent> <Leader>y :set opfunc=CopyWithoutIndent<cr>g@
 vmap <silent> <Leader>y :<c-u>call CopyWithoutIndent( visualmode() )<CR>
+
+function! CopyFileLinesWithoutIndent( type )
+  if ( len( a:type ) == 1 )
+    let lineStart = line( "'<" )
+    let lineEnd   = line( "'>" )
+  else
+    let lineStart = line( "'[" )
+    let lineEnd   = line( "']" )
+  endif
+  let info = expand( "%:p" )
+  if ( lineEnd - lineStart == 0 )
+    let info .= ', line ' . lineStart . ':'
+  else
+    let info .= ', lines ' . lineStart . '-' . lineEnd . ':'
+  endif
+  let lines = GetLinesWithoutIndent( lineStart, lineEnd )
+  let @+ = join( [ info, "" ] + lines, "\<NL>" )
+endfunction
+nmap <silent> <Leader>Y :set opfunc=CopyFileLinesWithoutIndent<cr>g@
+vmap <silent> <Leader>Y :<c-u>call CopyFileLinesWithoutIndent( visualmode() )<CR>
+
