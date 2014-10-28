@@ -1,0 +1,15 @@
+#!/bin/bash
+#Script to pause/resume notifications
+
+STATUS=$(ps aux | grep notify-osd | grep -c Tl)
+
+if [ "$STATUS" == "0" ]
+then
+  exec killall -s STOP notify-osd
+else
+  exec killall -s CONT notify-osd &
+  notify-send -u critical "Notifications are On"
+
+fi
+exit 0
+
