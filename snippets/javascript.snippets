@@ -41,6 +41,19 @@ snippet loggerWarn
 logger.warn('$1');
 endsnippet
 
+snippet moduleQunitHarness
+module('$1', {
+    setup: function () {
+    },
+    teardown: function () {
+    }
+});
+
+test('$2', function () {
+    $3
+});
+endsnippet
+
 snippet qunitok
 ok($1${2:, '$3'});
 endsnippet

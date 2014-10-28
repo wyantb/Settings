@@ -65,7 +65,10 @@ cmd = /home/brian/repos/meld/bin/meld --label='local' $LOCAL --label='merge' $BA
 ui = true
 
 [push]
-default = simple
+	default = simple
 
 [mergetool]
 keepBackup = false
+
+#[url "https://"]
+#	insteadOf = git://

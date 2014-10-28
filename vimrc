@@ -154,6 +154,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
 " Comment things out, e.g. with gcc motion
 NeoBundle 'tpope/vim-commentary'
 
+NeoBundle 'mephux/vim-jsfmt'
+
 " Popup as you go autocomplete
 NeoBundle 'Valloric/YouCompleteMe'
 
