@@ -34,3 +34,7 @@ EXPECTED_CCOLLAB_HOME=$HOME/progs/ccollab-cmdline
 
 export PATH
 
+export VIMRUNTIME=/usr/share/vim/vim74/
+
+# I mean...Ubuntu should at least let some core dumps be present by default, right?...
+ulimit -c unlimited
