@@ -148,7 +148,7 @@ nmap gQ <nop>
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
 
 " Comment things out, e.g. with gcc motion
@@ -234,15 +234,20 @@ NeoBundle 'kana/vim-textobj-lastpat'
 " ie ae for whole buffer - hey, ya never know...
 NeoBundle 'kana/vim-textobj-entire'
 
+call neobundle#end()
+
+" Required by NeoBundle
+filetype plugin indent on
+
+" Bundles listed but not installed?  This will prompt to install them
+NeoBundleCheck
+
 " Colors!
 "  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
 " color slate " what I used before 256 colors
 set t_Co=256
 set background=dark
 color harlequin-wyantb
-
-" Required by NeoBundle
-filetype plugin indent on
 
 " Empty out trailing whitespace on save (nice w/ my snippets that may introduce
 " spaces)
