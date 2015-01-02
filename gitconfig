@@ -23,6 +23,7 @@ tclean = clean -f -d
 mt = mergetool
 serve = daemon --reuseaddr --enable=receive-pack --verbose --base-path=. --export-all ./.git
 rb = !git fetch && git ff
+forget = rm --cached
 
 #From: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
 assume   = update-index --assume-unchanged
