@@ -21,7 +21,8 @@ type = cat-file -t
 dump = cat-file -p
 tclean = clean -f -d
 mt = mergetool
-serve = daemon --reuseaddr --enable=receive-pack --verbose --base-path=. --export-all ./.git
+serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+serve-allow-push = daemon --reuseaddr --enable=receive-pack --verbose --base-path=. --export-all ./.git
 rb = !git fetch && git ff
 forget = rm --cached
 
