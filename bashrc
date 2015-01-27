@@ -1,7 +1,10 @@
 
-if [ -f ~/.dotfiles/aliases ]; then
-    . ~/.dotfiles/aliases
+export DOTFILES_HOME=$HOME/.dotfiles
+if [ -f $DOTFILES_HOME/bashrc_private ]; then
+    . $DOTFILES_HOME/bashrc_private
 fi
+. $DOTFILES_HOME/aliases
+
 shopt -s expand_aliases
 
 # A touch of color w/ just username/directory
@@ -38,3 +41,6 @@ export VIMRUNTIME=/usr/share/vim/vim74/
 
 # I mean...Ubuntu should at least let some core dumps be present by default, right?...
 ulimit -c unlimited
+
+# Yes, allow **/*.js syntax plx
+shopt -s globstar
