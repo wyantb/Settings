@@ -43,7 +43,7 @@ EXPECTED_CCOLLAB_HOME=$HOME/progs/ccollab-cmdline
 PATH="$PATH:$DOTFILES_HOME/scripts/"
 export PATH
 
-export VIMRUNTIME=/usr/share/vim/vim74/
+export VIMRUNTIME=
 
 export no_proxy="$no_proxy,10.140.*"
 
