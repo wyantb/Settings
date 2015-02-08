@@ -209,7 +209,7 @@ NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'christoomey/vim-tmux-navigator'
 
 " CtrlP - Awesome show-as-you-type file searching
-NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist|projects\/adminwar\/war)$',
   \ 'file': '\v\.(exe|so|dll|class|orig|swp)$',
