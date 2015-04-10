@@ -5,7 +5,9 @@ _.each(${0:list}, function (${1:val}, ${2:key}) {
 endsnippet
 
 snippet define
-define([$1], function ($2) {
+define([
+    $1
+], function ($2) {
     'use strict';
 
     $3
@@ -32,9 +34,15 @@ throw new Error(message);
 endsnippet
 
 snippet excludeValidation
-//>>excludeStart("${2:validation}", pragmas.production)
-$1
+//>>excludeStart("${2:validation}", pragmas.${1:production})
+$3
 //>>excludeEnd("$2")
+endsnippet
+
+snippet includeValidation
+//>>includeStart("${2:validation}", pragmas.${1:production})
+$3
+//>>includeEnd("$2")
 endsnippet
 
 snippet loggerWarn

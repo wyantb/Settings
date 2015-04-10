@@ -74,3 +74,6 @@ keepBackup = false
 
 #[url "https://"]
 #	insteadOf = git://
+#
+#[url "https://"]
+#	insteadOf = git+https://
