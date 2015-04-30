@@ -258,7 +258,7 @@ function! TrimTrailingWhitespace()
     let c = col(".")
     %s/\s\+$//e       " clear out whitespace (possibly moving cursor)
     call cursor(l, c) " and go back to original pos
-:endfunction
+endfunction
 command! TrimTrailingWhitespace call TrimTrailingWhitespace()
 autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
 

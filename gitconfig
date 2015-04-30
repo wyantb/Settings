@@ -14,6 +14,7 @@ ci = commit
 st = status
 br = branch
 sub = submodule
+su = submodule update --init --recursive
 slog = log --pretty=format:\"%h %ad | %d %s [%an]\" --date=short
 hist = log --pretty=format:\"%h %ad | %d %s [%an]\" --graph --date=short
 hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
@@ -25,6 +26,7 @@ serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 serve-allow-push = daemon --reuseaddr --enable=receive-pack --verbose --base-path=. --export-all ./.git
 rb = !git fetch && git ff
 forget = rm --cached
+has = branch -a --contains
 
 #From: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
 assume   = update-index --assume-unchanged
