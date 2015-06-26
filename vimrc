@@ -216,6 +216,20 @@ let g:ctrlp_custom_ignore = {
   \ 'link': '',
   \ }
 
+" Faster CtrlP matching
+" http://blog.patspam.com/2014/super-fast-ctrlp
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+
+" Faster CtrlP matching
+NeoBundle 'FelikZ/ctrlp-py-matcher'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
 " My colorscheme
 "  forked from: NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'wyantb/harlequin'
