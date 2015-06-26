@@ -1,7 +1,6 @@
 
 snippet header
-use strict;
-use warnings;
+use Modern::Perl '2014';
 
 $1
 endsnippet
@@ -15,6 +14,14 @@ ${3:elsif ($4) {
 ${5:else {
 }}
 endsnippet
+
+snippet test
+package ${1:`!p snip.rv = snip.basename`};
+use base qw(Test::Class);
+use Test::More;
+
+endsnippet
+
 
 snippet class
 package ${1:`!p snip.rv = snip.basename`};
