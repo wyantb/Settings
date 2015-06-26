@@ -22,6 +22,8 @@ type = cat-file -t
 dump = cat-file -p
 tclean = clean -f -d
 mt = mergetool
+# Example url:
+# git clone git://10.140.0.0/ destfolder
 serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 serve-allow-push = daemon --reuseaddr --enable=receive-pack --verbose --base-path=. --export-all ./.git
 rb = !git fetch && git ff
@@ -35,7 +37,7 @@ assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
 
 [diff]
 #More from: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
-#algorithm = patience
+algorithm = patience
 
 [core]
 editor = vim
@@ -65,6 +67,10 @@ path = /home/brian/repos/meld/bin/meld
 # --auto-merge: Let meld try and do some auto merging before passing it off to you, the user
 cmd = /home/brian/repos/meld/bin/meld --label='local' $LOCAL --label='merge' $BASE --label='other' $REMOTE -o $MERGED --auto-merge
 
+[mergetool "kdiff3NoAuto"]
+# A variant config that won't automerge
+cmd = kdiff3 --L1 \"$MERGED (Base)\" --L2 \"$MERGED (Local)\" --L3 \"$MERGED (Remote)\" -o \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+
 [color]
 ui = true
 
@@ -72,7 +78,7 @@ ui = true
 	default = simple
 
 [mergetool]
-keepBackup = false
+    keepBackup = false
 
 #[url "https://"]
 #	insteadOf = git://
