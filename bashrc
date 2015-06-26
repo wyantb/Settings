@@ -39,6 +39,8 @@ export PATH
 
 export VIMRUNTIME=/usr/share/vim/vim74/
 
+export no_proxy="$no_proxy,10.140.*"
+
 # I mean...Ubuntu should at least let some core dumps be present by default, right?...
 ulimit -c unlimited
 
