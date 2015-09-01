@@ -26,6 +26,7 @@ alias kx=killxsel
 # don't know why this happens...
 alias fixunity='unity --reset-icons &disown'
 alias fixkdiff='export DISPLAY=:0.0'
+alias fixdisplay=fixkdiff
 alias fixssh='eval `ssh-agent -s`'
 
 # Lets you do something like `command || err`

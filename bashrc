@@ -17,6 +17,11 @@ fi
 [[ -s $HOME/.nvm/nvm.sh ]] && . /home/brian/.nvm/nvm.sh # Load NVM if present
 [[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Load RVM if present
 
+if [ -d $HOME/.go ]; then
+    export GOPATH=$HOME/.go
+    inPath "$GOPATH/bin" || PATH="$PATH:$GOPATH/bin"
+fi
+
 EXPECTED_JAVA_HOME=/usr/lib/jvm/java-7-oracle/
 if [ -d $EXPECTED_JAVA_HOME ]; then
     export JAVA_HOME=$EXPECTED_JAVA_HOME
