@@ -69,9 +69,31 @@ function! RealTab()
 endfunction
 command! RealTab call RealTab()
 
-" syntax of these languages is fussy over tabs Vs spaces
-autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+" syntax of these languages is fussy over tabs vs spaces
+autocmd FileType make setlocal ts=2 sts=2 sw=2 noexpandtab
+autocmd FileType go   setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Sometimes, you have some insane file that you need to open, and you really,
+" really don't want syntax highlighting and stuff hosing your system
+function! OptimizeSpeed()
+  syntax off
+  set nohlsearch
+  set t_Co=0
+  if g:qs_enable
+    QuickScopeToggle
+  endif
+endfunction
+function! OptimizeDefault()
+  syntax on
+  set hlsearch
+  set t_Co=256
+  if !g:qs_enable
+    QuickScopeToggle
+  endif
+endfunction
+command! OptimizeSpeed call OptimizeSpeed()
+command! OptimizeDefault call OptimizeDefault()
 
 command! FormatJSON %!python -m json.tool
 
@@ -154,8 +176,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
 " Comment things out, e.g. with gcc motion
 NeoBundle 'tpope/vim-commentary'
 
-NeoBundle 'mephux/vim-jsfmt'
-
 " Popup as you go autocomplete
 NeoBundle 'Valloric/YouCompleteMe'
 
@@ -224,6 +244,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .hg
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
+      \ --ignore node_modules
       \ -g ""'
 
 " Faster CtrlP matching
@@ -248,6 +269,14 @@ NeoBundle 'kana/vim-textobj-lastpat'
 " ie ae for whole buffer - hey, ya never know...
 NeoBundle 'kana/vim-textobj-entire'
 
+
+" highligts best letters for fFtT on the current line
+NeoBundle 'unblevable/quick-scope'
+
+" Language specific bits, otherwise uninteresting
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'jnwhiteh/vim-golang'
+NeoBundle 'Blackrush/vim-gocode'
 call neobundle#end()
 
 " Required by NeoBundle
@@ -274,7 +303,7 @@ function! TrimTrailingWhitespace()
     call cursor(l, c) " and go back to original pos
 endfunction
 command! TrimTrailingWhitespace call TrimTrailingWhitespace()
-autocmd FileType c,cpp,java,php,javascript,html autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
+autocmd FileType c,cpp,java,php,javascript,html,less autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
 
 " Experimental and various commands to remember
 

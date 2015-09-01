@@ -49,23 +49,37 @@ snippet loggerWarn
 logger.warn('$1');
 endsnippet
 
-snippet moduleQunitHarness
-module('$1', {
+snippet moduleQunitModuleHarness
+QUnit.module('$1'${2:, {
     setup: function () {
+        this.logHelper = loggerEventor();
     },
     teardown: function () {
+        this.logHelper.detach();
     }
-});
+}});
 
-test('$2', function () {
-    $3
+QUnit.test('$3', function (assert) {
+    ${4:this.logHelper.failOnWarn();}
+    $5
+});
+endsnippet
+
+snippet qunitTestAssert
+QUnit.test('${1:smoke test}', function (assert) {
+    ${4:this.logHelper.failOnWarn();}
+    $5
 });
 endsnippet
 
 snippet qunitok
-ok($1${2:, '$3'});
+assert.ok($1${2:, '$3'});
 endsnippet
 
 snippet qunitstrequal
-strictEqual(${1:actual}, ${2:expected}${3:, '$4'});
+assert.strictEqual(${1:actual}, ${2:expected}${3:, '$4'});
+endsnippet
+
+snippet qunitDeepEqual
+assert.deepEqual(${1:actual}, ${2:expected}${3:, '$4'});
 endsnippet
