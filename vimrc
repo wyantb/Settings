@@ -245,6 +245,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
       \ --ignore node_modules
+      \ --ignore .class
       \ -g ""'
 
 " Faster CtrlP matching
@@ -254,6 +255,10 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 " My colorscheme
 "  forked from: NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'wyantb/harlequin'
+
+" Handy dealing with minified files from a random source
+NeoBundle 'tony/vim-jsbeautify'
+command! JsBeautify call JsBeautify()
 
 " Let's make custom text objects
 NeoBundle 'kana/vim-textobj-user'
