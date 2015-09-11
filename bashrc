@@ -51,3 +51,9 @@ ulimit -c unlimited
 
 # Yes, allow **/*.js syntax plx
 shopt -s globstar
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/home/brian/progs/google-cloud-sdk/path.bash.inc'
+# The next line enables shell command completion for gcloud.
+source '/home/brian/progs/google-cloud-sdk/completion.bash.inc'
+
