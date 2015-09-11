@@ -34,8 +34,9 @@ alias kx=killxsel
 
 # don't know why this happens...
 alias fixunity='unity --reset-icons &disown'
-alias fixkdiff='export DISPLAY=:0.0'
-alias fixdisplay=fixkdiff
+alias fixdiff='export $(dbus-launch)'
+alias fixdisplay='export DISPLAY=:0.0'
+alias fixkdiff='fixdiff && fixdisplay'
 alias fixssh='eval `ssh-agent -s`'
 
 # Lets you do something like `command || err`
