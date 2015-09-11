@@ -77,9 +77,9 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Sometimes, you have some insane file that you need to open, and you really,
 " really don't want syntax highlighting and stuff hosing your system
 function! OptimizeSpeed()
-  syntax off
-  set nohlsearch
-  set t_Co=0
+  setlocal syntax=
+  setlocal nohlsearch
+  setlocal t_Co=0
   if g:qs_enable
     QuickScopeToggle
   endif
