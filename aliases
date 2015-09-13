@@ -11,12 +11,9 @@ alias killorig='find . -depth -name "*.orig" -type f -delete'
 
 alias dck='sudo docker'
 alias dck-remoteuntagged='dck images -q --filter "dangling=true" | xargs sudo docker rmi -f'
+alias dck-runsite='sudo docker run -it --net=host personal-site'
 #http://stackoverflow.com/questions/17903705/is-it-possible-to-start-a-shell-session-in-a-running-container-without-ssh
 #docker run --name ubuntu_bash --rm -i -t ubuntu bash
-runsite() {
-  SITEHASH=${sudo docker run -d -P personal-site}
-  export SITEHASH
-}
 
 # in my $HOME/.gitconfig in [alias] section:
 # tclean = clean -f -x -d --exclude 'node_modules'
