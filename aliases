@@ -26,6 +26,9 @@ alias countInPath="echo $PATH | tr ':' '\n' | grep -x -c"
 alias morningRoutine="git fetch && tig --all --author-date-order --no-merges"
 alias mr=morningRoutine
 
+alias use-real-scrollbars='gsettings set com.canonical.desktop.interface scrollbar-mode normal'
+alias use-default-scrollbars='gsettings reset com.canonical.desktop.interface scrollbar-mode'
+
 alias killxsel="pkill -c xsel"
 alias kx=killxsel
 
