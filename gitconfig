@@ -85,3 +85,6 @@ ui = true
 #
 #[url "https://"]
 #	insteadOf = git+https://
+
+[rerere]
+	enabled = false

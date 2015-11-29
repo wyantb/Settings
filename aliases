@@ -23,6 +23,9 @@ alias mr=morningRoutine
 alias killxsel="pkill -c xsel"
 alias kx=killxsel
 
+alias cripple_zeitgeist='chmod -rw ~/.local/share/zeitgeist/activity.sqlite && zeitgeist-daemon --replace'
+alias restore_zeitgesit='chmod +rw ~/.local/share/zeitgeist/activity.sqlite && zeitgeist-daemon --replace'
+
 # don't know why this happens...
 alias fixunity='unity --reset-icons &disown'
 alias fixkdiff='export DISPLAY=:0.0'
