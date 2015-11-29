@@ -32,6 +32,9 @@ alias use-default-scrollbars='gsettings reset com.canonical.desktop.interface sc
 alias killxsel="pkill -c xsel"
 alias kx=killxsel
 
+alias cripple_zeitgeist='chmod -rw ~/.local/share/zeitgeist/activity.sqlite && zeitgeist-daemon --replace'
+alias restore_zeitgesit='chmod +rw ~/.local/share/zeitgeist/activity.sqlite && zeitgeist-daemon --replace'
+
 # don't know why this happens...
 alias fixunity='unity --reset-icons &disown'
 alias fixdiff='export $(dbus-launch)'
