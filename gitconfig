@@ -29,6 +29,7 @@ serve-allow-push = daemon --reuseaddr --enable=receive-pack --verbose --base-pat
 rb = !git fetch && git ff
 forget = rm --cached
 has = branch -a --contains
+cs = !printf %s "$(git rev-parse HEAD)" | xsel -pbi
 
 #From: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
 assume   = update-index --assume-unchanged

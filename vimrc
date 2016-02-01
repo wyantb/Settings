@@ -146,13 +146,26 @@ set statusline+=\              " ends with whitespace
 " Reload vimrc
 map <Leader>v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloaded'"<CR>
 
-" Somewhat destructive, but I don't use marks, so I think I can afford making
+" Somewhat destructive, but I don't use marks much, so I think I can afford making
 " jumps to marks a little bit more keypress to get to
 nnoremap ' :
 vnoremap ' :
 nnoremap <Leader>' '
 vnoremap <Leader>' '
 
+" Setting some automatic Marks for different filetypes
+" Thanks https://www.reddit.com/r/vim/comments/41wgqf
+autocmd BufLeave *.css,*.less,*scss       normal! mC
+autocmd BufLeave *.html,*.hbr,*.hbs       normal! mH
+autocmd BufLeave *.js                     normal! mJ
+autocmd BufLeave Gruntfile.js             normal! mG
+autocmd BufLeave *.xml                    normal! mX
+autocmd BufLeave build.xml                normal! mB
+autocmd BufLeave *.properties             normal! mP
+autocmd BufLeave vimrc,*.vim              normal! mR
+autocmd BufLeave *.java                   normal! mV
+
+" Easier trigger for repeating previously-used macro
 nnoremap <Leader>m @@
 
 " Make yank behavior more consistent with D, C
@@ -166,6 +179,8 @@ nmap U <nop>
 nmap Q <nop>
 nmap gQ <nop>
 
+" Prefer git protocol, I have my keys setup
+let g:neobundle#types#git#default_protocol = 'git'
 " Load NeoBundle - https://github.com/Shougo/neobundle.vim
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -462,3 +477,76 @@ endfunction
 nmap <silent> <Leader>Y :set opfunc=CopyFileLinesWithoutIndent<cr>g@
 vmap <silent> <Leader>Y :<c-u>call CopyFileLinesWithoutIndent( visualmode() )<CR>
 
+" From Salman: commands for converting text to have spaces, ALL_CAPS,
+" dash-joins, etc
+
+function! CamelizeText( text )
+  let result = a:text
+  " Make sure it isn't already camel-cased.
+  if ( match( result, '[_\- ]' ) >= 0 )
+    let result = substitute( tolower( result ), '[_\- ]\([a-z]\)', '\u\1', 'g' )
+  endif
+  return result
+endfunction
+" Converts 'anInterestingPhrase' or 'an interesting phrase' to 'AN_INTERESTING_PHRASE'.
+function! MakeConstant( text )
+  return toupper( substitute( substitute( a:text, '\C\([^A-Z]\)\([A-Z]\)', '\1_\2', 'g' ), '[[:space:]_\-]\+', '_', 'g' ) )
+endfunction
+function! ManipulateMotion( type, searchString, replacementString )
+  if a:type == 'line'
+    let command = "S/" . a:searchString . "/" . a:replacementString . "/g"
+    silent execute "'[,']" . command
+    return
+  elseif a:type == 'block'
+    " This is not likely as it can only happen from visual mode, for which the mapping isn't defined anyway
+    silent exe "normal! `[\<C-V>`]"
+  else
+    silent exe "normal! `[v`]"
+  endif
+  execute "normal! \"xc\<c-r>=substitute(@x,'" . a:searchString . "','" . a:replacementString . "','g')\<cr>\<esc>"
+endfunction
+
+" From
+" the quick red fox jumped over the lazy brown dogs
+" To
+" theQuickRedFoxJumpedOverTheLazyBrownDogs
+function! CamelizeMotion( type )
+  call ManipulateMotion( a:type, '.*', '\=CamelizeText(submatch(0))' )
+endfunction
+nmap <silent> <leader>xa :set opfunc=CamelizeMotion<cr>g@
+
+" From
+" the quick red fox jumped over the lazy brown dogs
+" To
+" TheQuickRedFoxJumpedOverTheLazyBrownDogs
+function! CamelizeWithCapitalMotion( type )
+  call ManipulateMotion( a:type, '.*', '\=substitute(CamelizeText(submatch(0)), ".", "\\U\\0", "")' )
+endfunction
+nmap <silent> <leader>xf :set opfunc=CamelizeWithCapitalMotion<cr>g@
+
+" From
+" the quick red fox jumped over the lazy brown dogs
+" To
+" THE_QUICK_RED_FOX_JUMPED_OVER_THE_LAZY_BROWN_DOGS
+function! ConstantizeMotion( type )
+  call ManipulateMotion( a:type, '.*', '\=MakeConstant(submatch(0))' )
+endfunction
+nmap <silent> <leader>xo :set opfunc=ConstantizeMotion<cr>g@
+
+" From
+" the quick red fox jumped over the lazy brown dogs
+" To
+" the_quick_red_fox_jumped_over_the_lazy_brown_dogs
+function! SnakeCaseMotion( type )
+  call ManipulateMotion( a:type, '.*', '\=tolower(MakeConstant(submatch(0)))' )
+endfunction
+nmap <silent> <leader>xu :set opfunc=SnakeCaseMotion<cr>g@
+
+" From
+" TheQuickRedFoxJumpedOverTheLazyBrownDogs
+" To
+" the quick red fox jumped over the lazy brown dogs
+function! WordifyMotion( type )
+  call ManipulateMotion( a:type, '.*', '\=tolower(substitute(MakeConstant(submatch(0)), "_", " ", "g"))' )
+endfunction
+nmap <silent> <leader>xw :set opfunc=WordifyMotion<cr>g@
