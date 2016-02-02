@@ -13,8 +13,8 @@ ln -s $HOME/.dotfiles/hgrc $HOME/.hgrc
 
 # NeoBundle, and getting it ready:
 mkdir -p $HOME/.vim/bundle
-git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
-vim -c NeoBundleInstall!
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim -c PluginInstall!
 ```
 
 ### Hooks for a given repo

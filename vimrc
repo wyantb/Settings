@@ -1,3 +1,126 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" Comment things out, e.g. with gcc motion
+Plugin 'tpope/vim-commentary'
+
+" Popup as you go autocomplete
+Plugin 'Valloric/YouCompleteMe'
+
+" Snippets, snippets, snippets
+Plugin 'SirVer/ultisnips'
+" Overrides...executing a command and returning to insert?  don't care
+let g:UltiSnipsExpandTrigger="<C-o>"
+let g:UltiSnipsJumpForwardTrigger="<C-o>"
+let g:UltiSnipsEditSplit="vertical"
+" This...somehow manages to avoid conflict with <BS>.  Sweetness.
+let g:UltiSnipsJumpBackwardTrigger="<C-h>"
+let g:UltiSnipsSnippetsDir=$HOME."/.dotfiles/snippets"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.dotfiles/snippets"]
+
+" Better basic syntax for javascript
+Plugin 'jelera/vim-javascript-syntax'
+" And better indentation, highlighting
+Plugin 'pangloss/vim-javascript'
+" Syntax for mustache too
+Plugin 'mustache/vim-mustache-handlebars'
+
+" Syntax highlight for markdown files
+Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+
+" http://ternjs.net/ explains better than I can
+Plugin 'marijnh/tern_for_vim'
+nnoremap <Leader>g :TernDef<CR>
+nnoremap <Leader>r :TernRefs<CR>
+
+" Allows for repeating of plugin movement keys (sneak, surround)
+Plugin 'tpope/vim-repeat'
+
+" A good medium range movement key (replaces 's')
+Plugin 'justinmk/vim-sneak'
+let g:sneak#streak = 1
+" nmap s :redr<CR><Plug>(SneakStreak)
+" nmap S :redr<CR><Plug>(SneakStreakBackward)
+
+" Replaces s with the 'surround' movement
+Plugin 'tpope/vim-surround'
+
+" I like :Gblame
+Plugin 'tpope/vim-fugitive'
+
+" A few small supplements to netrw
+"  Try '-', for example, to open to current file/dir in netrw
+Plugin 'tpope/vim-vinegar'
+
+" Ctrl-direction can navigate either vim or tmux splits
+Plugin 'christoomey/vim-tmux-navigator'
+
+" CtrlP - Awesome show-as-you-type file searching
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist|projects\/adminwar\/war)$',
+  \ 'file': '\v\.(exe|so|dll|class|orig|swp)$',
+  \ 'link': '',
+  \ }
+
+" Faster CtrlP matching
+" http://blog.patspam.com/2014/super-fast-ctrlp
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ --ignore node_modules
+      \ --ignore .class
+      \ -g ""'
+
+" Faster CtrlP matching
+Plugin 'FelikZ/ctrlp-py-matcher'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+" My colorscheme
+"  forked from: Plugin 'nielsmadan/harlequin'
+Plugin 'wyantb/harlequin'
+
+" Handy dealing with minified files from a random source
+Plugin 'tony/vim-jsbeautify'
+command! JsBeautify call JsBeautify()
+
+" Let's make custom text objects
+Plugin 'kana/vim-textobj-user'
+
+" try: cic, dac, daC (aC includes whitespace)
+Plugin 'glts/vim-textobj-comment'
+" try: ci_, da_
+Plugin 'lucapette/vim-textobj-underscore'
+" i, a, for function params
+Plugin 'sgur/vim-textobj-parameter'
+" i/ a/ for the last search (remember dot formula: n. n. n.)
+Plugin 'kana/vim-textobj-lastpat'
+" ie ae for whole buffer - hey, ya never know...
+Plugin 'kana/vim-textobj-entire'
+
+
+" highligts best letters for fFtT on the current line
+Plugin 'unblevable/quick-scope'
+
+" Language specific bits, otherwise uninteresting
+Plugin 'groenewege/vim-less'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'Blackrush/vim-gocode'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 " The basics
 set nocompatible
 syntax on
@@ -179,131 +302,6 @@ nmap U <nop>
 nmap Q <nop>
 nmap gQ <nop>
 
-" Prefer git protocol, I have my keys setup
-let g:neobundle#types#git#default_protocol = 'git'
-" Load NeoBundle - https://github.com/Shougo/neobundle.vim
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'  " NeoBundle itself
-
-" Comment things out, e.g. with gcc motion
-NeoBundle 'tpope/vim-commentary'
-
-" Popup as you go autocomplete
-NeoBundle 'Valloric/YouCompleteMe'
-
-" Snippets, snippets, snippets
-NeoBundle 'SirVer/ultisnips'
-" Overrides...executing a command and returning to insert?  don't care
-let g:UltiSnipsExpandTrigger="<C-o>"
-let g:UltiSnipsJumpForwardTrigger="<C-o>"
-let g:UltiSnipsEditSplit="vertical"
-" This...somehow manages to avoid conflict with <BS>.  Sweetness.
-let g:UltiSnipsJumpBackwardTrigger="<C-h>"
-let g:UltiSnipsSnippetsDir=$HOME."/.dotfiles/snippets"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.dotfiles/snippets"]
-
-" Better basic syntax for javascript
-NeoBundle 'jelera/vim-javascript-syntax'
-" And better indentation, highlighting
-NeoBundle 'pangloss/vim-javascript'
-" Syntax for mustache too
-NeoBundle 'mustache/vim-mustache-handlebars'
-
-" Syntax highlight for markdown files
-NeoBundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
-
-" http://ternjs.net/ explains better than I can
-NeoBundle 'marijnh/tern_for_vim'
-nnoremap <Leader>g :TernDef<CR>
-nnoremap <Leader>r :TernRefs<CR>
-
-" Allows for repeating of plugin movement keys (sneak, surround)
-NeoBundle 'tpope/vim-repeat'
-
-" A good medium range movement key (replaces 's')
-NeoBundle 'justinmk/vim-sneak'
-let g:sneak#streak = 1
-" nmap s :redr<CR><Plug>(SneakStreak)
-" nmap S :redr<CR><Plug>(SneakStreakBackward)
-
-" Replaces s with the 'surround' movement
-NeoBundle 'tpope/vim-surround'
-
-" I like :Gblame
-NeoBundle 'tpope/vim-fugitive'
-
-" A few small supplements to netrw
-"  Try '-', for example, to open to current file/dir in netrw
-NeoBundle 'tpope/vim-vinegar'
-
-" Ctrl-direction can navigate either vim or tmux splits
-NeoBundle 'christoomey/vim-tmux-navigator'
-
-" CtrlP - Awesome show-as-you-type file searching
-NeoBundle 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist|projects\/adminwar\/war)$',
-  \ 'file': '\v\.(exe|so|dll|class|orig|swp)$',
-  \ 'link': '',
-  \ }
-
-" Faster CtrlP matching
-" http://blog.patspam.com/2014/super-fast-ctrlp
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ --ignore node_modules
-      \ --ignore .class
-      \ -g ""'
-
-" Faster CtrlP matching
-NeoBundle 'FelikZ/ctrlp-py-matcher'
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-
-" My colorscheme
-"  forked from: NeoBundle 'nielsmadan/harlequin'
-NeoBundle 'wyantb/harlequin'
-
-" Handy dealing with minified files from a random source
-NeoBundle 'tony/vim-jsbeautify'
-command! JsBeautify call JsBeautify()
-
-" Let's make custom text objects
-NeoBundle 'kana/vim-textobj-user'
-
-" try: cic, dac, daC (aC includes whitespace)
-NeoBundle 'glts/vim-textobj-comment'
-" try: ci_, da_
-NeoBundle 'lucapette/vim-textobj-underscore'
-" i, a, for function params
-NeoBundle 'sgur/vim-textobj-parameter'
-" i/ a/ for the last search (remember dot formula: n. n. n.)
-NeoBundle 'kana/vim-textobj-lastpat'
-" ie ae for whole buffer - hey, ya never know...
-NeoBundle 'kana/vim-textobj-entire'
-
-
-" highligts best letters for fFtT on the current line
-NeoBundle 'unblevable/quick-scope'
-
-" Language specific bits, otherwise uninteresting
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'jnwhiteh/vim-golang'
-NeoBundle 'Blackrush/vim-gocode'
-call neobundle#end()
-
-" Required by NeoBundle
-filetype plugin indent on
-
-" Bundles listed but not installed?  This will prompt to install them
-NeoBundleCheck
 
 " Colors!
 "  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
