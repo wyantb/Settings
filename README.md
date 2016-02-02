@@ -11,6 +11,12 @@ ln -s $HOME/.dotfiles/profile $HOME/.profile
 ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig
 ln -s $HOME/.dotfiles/hgrc $HOME/.hgrc
 
+# Nvim added steps; optional if not using neovim, obv
+mkdir -p $HOME/.config/nvim
+cd $HOME/.config/nvim
+ln -s $HOME/.dotfiles/vimrc init.vim
+ln -s $HOME/.vim nvim
+
 # Plugin manager, and getting it ready:
 mkdir -p $HOME/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

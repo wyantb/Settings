@@ -43,6 +43,7 @@ EXPECTED_CCOLLAB_HOME=$HOME/progs/ccollab-cmdline
 PATH="$PATH:$DOTFILES_HOME/scripts/"
 export PATH
 
+export XDG_CONFIG_HOME=/home/brian/.config
 export VIMRUNTIME=
 
 export no_proxy="$no_proxy,10.140.*"
