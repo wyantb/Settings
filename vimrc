@@ -1,5 +1,10 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
+
+" Easier to access than the default \
+let mapleader = " "
+
+" required, before bundle
+filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -125,9 +130,10 @@ filetype plugin indent on    " required
 set nocompatible
 syntax on
 set number
-
-" Easier to access than the default \
-let mapleader = " "
+" nvim has mouse behaviors enabled; I honestly don't use mouse for vim, would
+" prefer the default gnome-terminal behavior (to e.g. let my copy/paste stuff
+" from the statusline)
+set mouse=
 
 " Search stuffs
 set hlsearch    " highlight searches
@@ -301,7 +307,6 @@ nmap U <nop>
 " feedback?  Try to map to something useful.
 nmap Q <nop>
 nmap gQ <nop>
-
 
 " Colors!
 "  To experiment, try tabbing through - :color [Tab][Tab][Tab] (etc)
