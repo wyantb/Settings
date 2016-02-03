@@ -127,9 +127,16 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 nnoremap <Leader>p :FZF<CR>
 
+" linting as you save, eh what?
+Plugin 'benekastah/neomake'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" Neomake hookups
+autocmd FileType javascript autocmd BufRead *.js set makeprg=jshint
+autocmd FileType javascript autocmd BufWritePost *.js Neomake jshint
 
 " The basics
 set nocompatible
