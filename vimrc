@@ -122,6 +122,11 @@ Plugin 'groenewege/vim-less'
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'Blackrush/vim-gocode'
 
+" fzf, find stuff https://github.com/junegunn/fzf
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+nnoremap <Leader>p :FZF<CR>
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

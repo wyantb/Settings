@@ -11,10 +11,14 @@ ln -s $HOME/.dotfiles/profile $HOME/.profile
 ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig
 ln -s $HOME/.dotfiles/hgrc $HOME/.hgrc
 
-# NeoBundle, and getting it ready:
+# Plugin manager, and getting it ready:
 mkdir -p $HOME/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim -c PluginInstall!
+
+# Installing fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 ```
 
 ### Hooks for a given repo

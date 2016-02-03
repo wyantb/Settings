@@ -52,8 +52,8 @@ ulimit -c unlimited
 # Yes, allow **/*.js syntax plx
 shopt -s globstar
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/home/brian/progs/google-cloud-sdk/path.bash.inc'
-# The next line enables shell command completion for gcloud.
-source '/home/brian/progs/google-cloud-sdk/completion.bash.inc'
+# Source fzf https://github.com/junegunn/fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
 
