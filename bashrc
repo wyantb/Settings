@@ -55,5 +55,10 @@ shopt -s globstar
 # Source fzf https://github.com/junegunn/fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Setting ag as the default source for fzf
+# Handy since I'll already setup ag to have ignored files
 export FZF_DEFAULT_COMMAND='ag -g ""'
-
+# And since fzf replaces my bash history ctrl-r, let's give it more history to work with
+# http://www.mosbase.com/2010/05/increase-your-bash-history-size.html
+export HISTSIZE=100000
+export HISTCONTROL=erasedups
+shopt -s histappend
