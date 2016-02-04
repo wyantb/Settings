@@ -130,6 +130,13 @@ nnoremap <Leader>p :FZF<CR>
 " linting as you save, eh what?
 Plugin 'benekastah/neomake'
 
+" async, for ferret, and then aliases for easier quickfix usage
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-unimpaired'
+
+" :Ack, which uses ag
+Plugin 'wincent/ferret'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
