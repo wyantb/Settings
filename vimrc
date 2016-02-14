@@ -137,6 +137,10 @@ Plugin 'tpope/vim-unimpaired'
 " :Ack, which uses ag
 Plugin 'wincent/ferret'
 
+" Visual representation of undo graph
+" Toggle w/ :UndotreeToggle
+Plugin 'mbbill/undotree'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -144,6 +148,13 @@ filetype plugin indent on    " required
 " Neomake hookups
 autocmd FileType javascript autocmd BufRead *.js set makeprg=jshint
 autocmd FileType javascript autocmd BufWritePost *.js Neomake jshint
+
+" Undo tweaks, assuming undotree plugin
+if has("persistent_undo")
+    set undodir=~/.config/vim-undodir/
+    set undofile
+endif
+nnoremap <Leader>u :UndotreeToggle<CR>
 
 " The basics
 set nocompatible
