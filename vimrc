@@ -141,6 +141,9 @@ Plugin 'wincent/ferret'
 " Toggle w/ :UndotreeToggle
 Plugin 'mbbill/undotree'
 
+" Helpful when JSON goes all wrong
+Plugin 'elzr/vim-json'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -311,6 +314,10 @@ nnoremap ' :
 vnoremap ' :
 nnoremap <Leader>' '
 vnoremap <Leader>' '
+
+" Easier to reach, default H/L (move to top/bot of window) aren't helpful
+noremap H ^
+noremap L g_
 
 " Setting some automatic Marks for different filetypes
 " Thanks https://www.reddit.com/r/vim/comments/41wgqf
