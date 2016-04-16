@@ -12,6 +12,9 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
 " Comment things out, e.g. with gcc motion
 Plugin 'tpope/vim-commentary'
 
