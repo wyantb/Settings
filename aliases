@@ -1,5 +1,14 @@
+#!/bin/bash
 
 DOTFILES_HOME=$HOME/.dotfiles
+
+# http://stackoverflow.com/a/11512211
+dir_to_755() {
+    find ./ -type d -exec chmod 755 {} \;
+}
+files_to_644() {
+    find /opt/lampp/htdocs -type f -exec chmod 644 {} \;
+}
 
 alias cls='clear; ls'
 alias sadd='ssh-add'
