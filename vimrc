@@ -130,9 +130,6 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 nnoremap <Leader>p :FZF<CR>
 
-" linting as you save, eh what?
-Plugin 'benekastah/neomake'
-
 " async, for ferret, and then aliases for easier quickfix usage
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-unimpaired'
@@ -147,13 +144,13 @@ Plugin 'mbbill/undotree'
 " Helpful when JSON goes all wrong
 Plugin 'elzr/vim-json'
 
+" Syntax checking
+Plugin 'scrooloose/syntastic'
+Plugin 'mtscout6/syntastic-local-eslint.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-" Neomake hookups
-autocmd FileType javascript autocmd BufRead *.js set makeprg=jshint
-autocmd FileType javascript autocmd BufWritePost *.js Neomake jshint
 
 " Undo tweaks, assuming undotree plugin
 if has("persistent_undo")
@@ -177,6 +174,13 @@ set incsearch   " do incremental searching
 set showmatch   " jump to matches when entering regexp
 set ignorecase  " ignore case when searching
 set smartcase   " no ignorecase if Uppercase char present
+
+" Hookup syntastic
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Clear highlighted search when redrawing screen, without moving cursor
 nnoremap <CR> :nohls<CR>
@@ -302,6 +306,11 @@ set statusline+=%m             " modified
 set statusline+=%r             " read-only
 set statusline+=%y             " filetype
 set statusline+=%w             " preview
+" Syntastic
+set statusline+=\              " whitespace
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 set statusline+=%=             " split
 set statusline+=Col:\ \%c      " column number
 set statusline+=\              " whitespace
