@@ -40,6 +40,7 @@ fi
 EXPECTED_CCOLLAB_HOME=$HOME/progs/ccollab-cmdline
 [[ -d $EXPECTED_CCOLLAB_HOME ]] && PATH=$PATH:$EXPECTED_CCOLLAB_HOME
 
+PATH="$PATH:$DOTFILES_HOME/scripts/"
 export PATH
 
 export VIMRUNTIME=/usr/share/vim/vim74/
