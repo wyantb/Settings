@@ -47,6 +47,7 @@ alias restore_zeitgesit='chmod +rw ~/.local/share/zeitgeist/activity.sqlite && z
 alias dosuspend='systemctl suspend'
 
 # don't know why this happens...
+alias fixmouse="sudo modprobe -r psmouse && sudo modprobe psmouse"
 alias fixwireless='sudo service network-manager restart'
 alias fixunity='unity --reset-icons &disown'
 alias fixdiff='export $(dbus-launch)'
