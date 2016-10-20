@@ -145,8 +145,8 @@ Plugin 'mbbill/undotree'
 Plugin 'elzr/vim-json'
 
 " Syntax checking
-Plugin 'scrooloose/syntastic'
-Plugin 'mtscout6/syntastic-local-eslint.vim'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'mtscout6/syntastic-local-eslint.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -307,9 +307,9 @@ set statusline+=%r             " read-only
 set statusline+=%y             " filetype
 set statusline+=%w             " preview
 " Syntastic
-set statusline+=\              " whitespace
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=\              " whitespace
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=%=             " split
 set statusline+=Col:\ \%c      " column number
