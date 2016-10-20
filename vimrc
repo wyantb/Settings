@@ -148,7 +148,7 @@ Plugin 'elzr/vim-json'
 " Plugin 'scrooloose/syntastic'
 " Plugin 'mtscout6/syntastic-local-eslint.vim'
 
-Plugin 'vim-scripts/swap-parameters'
+" Plugin 'vim-scripts/swap-parameters'
 
 Plugin 'kien/rainbow_parentheses.vim'
 
