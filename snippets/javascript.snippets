@@ -51,10 +51,10 @@ endsnippet
 
 snippet moduleQunitModuleHarness
 QUnit.module('$1'${2:, {
-    setup: function () {
+    beforeEach : function () {
         this.logHelper = loggerEventor();
     },
-    teardown: function () {
+    afterEach : function () {
         this.logHelper.detach();
     }
 }});

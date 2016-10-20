@@ -148,6 +148,10 @@ Plugin 'elzr/vim-json'
 " Plugin 'scrooloose/syntastic'
 " Plugin 'mtscout6/syntastic-local-eslint.vim'
 
+Plugin 'vim-scripts/swap-parameters'
+
+Plugin 'kien/rainbow_parentheses.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -342,6 +346,7 @@ autocmd BufLeave build.xml                normal! mB
 autocmd BufLeave *.properties             normal! mP
 autocmd BufLeave vimrc,*.vim              normal! mR
 autocmd BufLeave *.java                   normal! mV
+autocmd BufLeave *.txt,*.text             normal! mT
 
 " Easier trigger for repeating previously-used macro
 nnoremap <Leader>m @@
@@ -376,6 +381,20 @@ function! TrimTrailingWhitespace()
 endfunction
 command! TrimTrailingWhitespace call TrimTrailingWhitespace()
 autocmd FileType c,cpp,java,php,javascript,html,less autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
+
+" Thanks, SO!  http://stackoverflow.com/a/29819201
+function! JscsFix()
+    "Save current cursor position"
+    let l:winview = winsaveview()
+    "Pipe the current buffer (%) through the jscs -x command"
+    % ! jscs -x
+    "Restore cursor position - this is needed as piping the file"
+    "through jscs jumps the cursor to the top"
+    call winrestview(l:winview)
+endfunction
+command! JscsFix :call JscsFix()
+"Run the JscsFix command just before the buffer is written for *.js files"
+"autocmd BufWritePre *.js JscsFix
 
 " Experimental and various commands to remember
 
