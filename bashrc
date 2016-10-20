@@ -60,6 +60,6 @@ shopt -s globstar
 export FZF_DEFAULT_COMMAND='ag -g ""'
 # And since fzf replaces my bash history ctrl-r, let's give it more history to work with
 # http://www.mosbase.com/2010/05/increase-your-bash-history-size.html
-export HISTSIZE=100000
+export HISTSIZE=3000000
 export HISTCONTROL=erasedups
 shopt -s histappend
