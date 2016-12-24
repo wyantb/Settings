@@ -1,55 +1,54 @@
 [user]
-name = Brian Wyant
-email = wyantb@gmail.com
-#email = brian.wyant@oracle.com
+	name = Brian Wyant
+	email = wyantb@gmail.com
 
 [credential]
-#username = bwyant
-#helper = cache --timeout 7200
+	#username = bwyant
+	#helper = cache --timeout 7200
 
 [alias]
-ff = merge --ff-only
-co = checkout
-ci = commit
-st = status
-br = branch
-sub = submodule
-su = submodule update --init --recursive
-slog = log --pretty=format:\"%h %ad | %d %s [%an]\" --date=short
-hist = log --pretty=format:\"%h %ad | %d %s [%an]\" --graph --date=short
-hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
-type = cat-file -t
-dump = cat-file -p
-tclean = clean -f -d
-mt = mergetool
-# Example url:
-# git clone git://10.140.0.0/ destfolder
-serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
-serve-allow-push = daemon --reuseaddr --enable=receive-pack --verbose --base-path=. --export-all ./.git
-rb = !git fetch && git ff
-forget = rm --cached
-has = branch -a --contains
-cs = !printf %s "$(git rev-parse HEAD)" | xsel -pbi
-gccc = repack -Adl
+	ff = merge --ff-only
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	sub = submodule
+	su = submodule update --init --recursive
+	slog = log --pretty=format:\"%h %ad | %d %s [%an]\" --date=short
+	hist = log --pretty=format:\"%h %ad | %d %s [%an]\" --graph --date=short
+	hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	tclean = clean -f -d
+	mt = mergetool
+	# Example url:
+	# git clone git://10.140.0.0/ destfolder
+	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+	serve-allow-push = daemon --reuseaddr --enable=receive-pack --verbose --base-path=. --export-all ./.git
+	rb = !git fetch && git ff
+	forget = rm --cached
+	has = branch -a --contains
+	cs = !printf %s "$(git rev-parse HEAD)" | xsel -pbi
+	gccc = repack -Adl
 
-#From: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
-assume   = update-index --assume-unchanged
-unassume = update-index --no-assume-unchanged
-assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+	#From: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+	assume   = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
 
 [diff]
-#More from: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
-algorithm = patience
+	#More from: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+	algorithm = patience
 
 [core]
-editor = vim
-excludesfile = ~/.dotfiles/gitignore
-autocrlf = input
+	editor = vim
+	excludesfile = ~/.dotfiles/gitignore
+	autocrlf = input
 
 [merge]
-tool = kdiff3
-conflictstyle = diff3
-defaultToUpstream = true
+	tool = kdiff3
+	conflictstyle = diff3
+	defaultToUpstream = true
 
 # Meld?
 # Not sure how recent the --auto-merge stuff is; can always use meld straight from source
@@ -61,32 +60,22 @@ defaultToUpstream = true
 # Why a custom name?  See
 #  http://stackoverflow.com/questions/7435002/mergetool-from-gitconfig-being-ignored
 [mergetool "meld-custom"]
+	# http://stackoverflow.com/questions/1251681/diff-tool-generates-unwanted-orig-files
+	keepBackup = false
 
-# http://stackoverflow.com/questions/1251681/diff-tool-generates-unwanted-orig-files
-keepBackup = false
-
-path = /home/brian/repos/meld/bin/meld
-# --auto-merge: Let meld try and do some auto merging before passing it off to you, the user
-cmd = /home/brian/repos/meld/bin/meld --label='local' $LOCAL --label='merge' $BASE --label='other' $REMOTE -o $MERGED --auto-merge
+	path = /home/brian/repos/meld/bin/meld
+	# --auto-merge: Let meld try and do some auto merging before passing it off to you, the user
+	cmd = /home/brian/repos/meld/bin/meld --label='local' $LOCAL --label='merge' $BASE --label='other' $REMOTE -o $MERGED --auto-merge
 
 [mergetool "kdiff3NoAuto"]
-# A variant config that won't automerge
-cmd = kdiff3 --L1 \"$MERGED (Base)\" --L2 \"$MERGED (Local)\" --L3 \"$MERGED (Remote)\" -o \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+	# A variant config that won't automerge
+	cmd = kdiff3 --L1 \"$MERGED (Base)\" --L2 \"$MERGED (Local)\" --L3 \"$MERGED (Remote)\" -o \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
 
 [color]
-ui = true
+	ui = true
 
 [push]
 	default = simple
 
 [mergetool]
-    keepBackup = false
-
-#[url "https://"]
-#	insteadOf = git://
-#
-#[url "https://"]
-#	insteadOf = git+https://
-
-[rerere]
-	enabled = false
+	keepBackup = false
