@@ -10,7 +10,7 @@
 	ff = merge --ff-only
 	co = checkout
 	ci = commit
-	st = status
+	st = status -sb
 	br = branch
 	sub = submodule
 	su = submodule update --init --recursive

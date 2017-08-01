@@ -58,3 +58,33 @@ alias fixssh='eval `ssh-agent -s`'
 # Lets you do something like `command || err`
 alias err='notify-send "Build Failed"'
 
+# Make 'ls' command pretty by default
+alias ls='ls -Gap'
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+# Other handy things
+mcd () { mkdir -p "$1" && cd "$1"; }                # mcd:          Makes new Dir and jumps inside
+alias myip='curl ip.appspot.com'                    # myip:         Public facing IP Address
+alias netCons='lsof -i'                             # netCons:      Show all open TCP/IP sockets
+alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
+alias lsock='sudo /usr/sbin/lsof -i -P'             # lsock:        Display open sockets
+alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'   # lsockU:       Display only open UDP sockets
+alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'   # lsockT:       Display only open TCP sockets
+alias ipInfo0='ipconfig getpacket en0'              # ipInfo0:      Get info on connections for en0
+alias ipInfo1='ipconfig getpacket en1'              # ipInfo1:      Get info on connections for en1
+alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
+alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rules inc/ blocked IPs
+
+# Epoch seconds to date, and back:
+epoch2date(){ (alias; declare -f) | echo "$@" | perl -ne 'chomp; my @in = split /\s+/, $_; map { my $out = ( $_ =~ m/^(\d{1,10})\d*$/ ) ? scalar localtime($1) : "Invalid time format ($in)- not epoch seconds."; print "$out\n" } @in;';
+}
+export -f epoch2date
+ 
+date2epoch(){ (alias; declare -f) | echo "$@" | perl -MDate::Parse -ne 'chomp; print str2time($_), "\n";';
+}
+export -f date2epoch
+
+fileintoclipmac () {
+    cat $1 | pbcopy
+}

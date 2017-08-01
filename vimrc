@@ -144,6 +144,8 @@ Plugin 'mbbill/undotree'
 " Helpful when JSON goes all wrong
 Plugin 'elzr/vim-json'
 
+Plugin 'derekwyatt/vim-scala'
+
 " Syntax checking
 " Plugin 'scrooloose/syntastic'
 " Plugin 'mtscout6/syntastic-local-eslint.vim'
@@ -547,6 +549,52 @@ function! CopyFileLinesWithoutIndent( type )
 endfunction
 nmap <silent> <Leader>Y :set opfunc=CopyFileLinesWithoutIndent<cr>g@
 vmap <silent> <Leader>Y :<c-u>call CopyFileLinesWithoutIndent( visualmode() )<CR>
+
+function! StripHome(inp)
+    return substitute(a:inp, '\/Users\/brianwyant\/', '', '')
+endfunction
+
+function! CopyFileLinesForSnippet( type )
+  if ( len( a:type ) == 1 )
+    let lineStart = line( "'<" )
+    let lineEnd   = line( "'>" )
+  else
+    let lineStart = line( "'[" )
+    let lineEnd   = line( "']" )
+  endif
+  let info = StripHome( expand( "%:p" ) )
+  if ( lineEnd - lineStart == 0 )
+    let info .= ', line ' . lineStart . ':'
+  else
+    let info .= ', lines ' . lineStart . '-' . lineEnd . ':'
+  endif
+  let lines = GetLinesWithoutIndent( lineStart, lineEnd )
+  let joinedLines = '```' . join( lines, "\<NL>" ) . '```'
+  let @+ = join( [ info, "", joinedLines ], "\<NL>" )
+endfunction
+nmap <silent> <Leader>s :set opfunc=CopyFileLinesForSnippet<cr>g@
+vmap <silent> <Leader>s :<c-u>call CopyFileLinesForSnippet( visualmode() )<CR>
+
+function! CopyFileLinesForJiraSnippet( type )
+  if ( len( a:type ) == 1 )
+    let lineStart = line( "'<" )
+    let lineEnd   = line( "'>" )
+  else
+    let lineStart = line( "'[" )
+    let lineEnd   = line( "']" )
+  endif
+  let info = StripHome( expand( "%:p" ) )
+  if ( lineEnd - lineStart == 0 )
+    let info .= ', line ' . lineStart . ':'
+  else
+    let info .= ', lines ' . lineStart . '-' . lineEnd . ':'
+  endif
+  let lines = GetLinesWithoutIndent( lineStart, lineEnd )
+  let joinedLines = join( [ '{code}',  join( lines, "\<NL>" ), '{code}' ], "\<NL>" )
+  let @+ = join( [ info, "", joinedLines ], "\<NL>" )
+endfunction
+nmap <silent> <Leader>j :set opfunc=CopyFileLinesForJiraSnippet<cr>g@
+vmap <silent> <Leader>j :<c-u>call CopyFileLinesForJiraSnippet( visualmode() )<CR>
 
 " From Salman: commands for converting text to have spaces, ALL_CAPS,
 " dash-joins, etc
