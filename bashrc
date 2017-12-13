@@ -22,15 +22,10 @@ fi
 PATH="$PATH:$DOTFILES_HOME/scripts/"
 export PATH
 
-export VIMRUNTIME=/usr/share/vim/vim74/
-
 export no_proxy="$no_proxy,10.140.*"
 
 # I mean...Ubuntu should at least let some core dumps be present by default, right?...
 ulimit -c unlimited
-
-# Yes, allow **/*.js syntax plx
-shopt -s globstar
 
 # Source fzf https://github.com/junegunn/fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
