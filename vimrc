@@ -140,6 +140,7 @@ Plugin 'wincent/ferret'
 " Visual representation of undo graph
 " Toggle w/ :UndotreeToggle
 Plugin 'mbbill/undotree'
+nnoremap <Leader>u :UndotreeToggle<CR>
 
 " Helpful when JSON goes all wrong
 Plugin 'elzr/vim-json'
@@ -152,7 +153,16 @@ Plugin 'derekwyatt/vim-scala'
 
 " Plugin 'vim-scripts/swap-parameters'
 
+" What it says on the tin.  Handy enough
 Plugin 'kien/rainbow_parentheses.vim'
+
+" Displays +/-/etc in gutter
+" Also, can use [c or ]c to jump between hunks
+Plugin 'airblade/vim-gitgutter'
+
+" Uses ctags to display landmarks
+Plugin 'majutsushi/tagbar'
+nnoremap <Leader>t :TagbarToggle<CR>
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -163,7 +173,6 @@ if has("persistent_undo")
     set undodir=~/.config/vim-undodir/
     set undofile
 endif
-nnoremap <Leader>u :UndotreeToggle<CR>
 
 " The basics
 set nocompatible
@@ -198,8 +207,8 @@ cmap w!! w !sudo tee > /dev/null %
 set nobackup
 set noswapfile
 
-" With enough plugins and macros, not redrawing while in progress really does
-" help
+" With enough stuff going on and macros and etc, not redrawing while in
+" progress really does help
 set lazyredraw
 
 set visualbell t_vb = " turn off error beep/flash
