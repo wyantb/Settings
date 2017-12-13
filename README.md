@@ -12,6 +12,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 # This actually needs to go before the line for oh-my-zsh sourcing itself, so move it once done
 echo "[ -f $HOME/.dotfiles/zshrc ] && source $HOME/.dotfiles/zshrc" >> $HOME/.zshrc
 
+# And install theme:
+ln -s $DOTFILES_HOME/main.zsh-theme ~/.oh-my-zsh/themes/main.zsh-theme
+
 ln -s $HOME/.dotfiles/vimrc $HOME/.vimrc
 ln -s $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
 ln -s $HOME/.dotfiles/profile $HOME/.profile
