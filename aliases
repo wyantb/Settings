@@ -46,6 +46,8 @@ alias restore_zeitgesit='chmod +rw ~/.local/share/zeitgeist/activity.sqlite && z
 
 alias dosuspend='systemctl suspend'
 
+alias deleteorigfiles="find . -name '*.orig' -delete "
+
 # don't know why this happens...
 alias fixmouse="sudo modprobe -r psmouse && sudo modprobe psmouse"
 alias fixwireless='sudo service network-manager restart'
@@ -54,6 +56,7 @@ alias fixdiff='export $(dbus-launch)'
 alias fixdisplay='export DISPLAY=:0.0'
 alias fixkdiff='fixdiff && fixdisplay'
 alias fixssh='eval `ssh-agent -s`'
+alias fixterminal='stty sane'
 
 # Lets you do something like `command || err`
 alias err='notify-send "Build Failed"'
@@ -77,14 +80,15 @@ alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listenin
 alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rules inc/ blocked IPs
 
 # Epoch seconds to date, and back:
-epoch2date(){ (alias; declare -f) | echo "$@" | perl -ne 'chomp; my @in = split /\s+/, $_; map { my $out = ( $_ =~ m/^(\d{1,10})\d*$/ ) ? scalar localtime($1) : "Invalid time format ($in)- not epoch seconds."; print "$out\n" } @in;';
-}
-export -f epoch2date
- 
-date2epoch(){ (alias; declare -f) | echo "$@" | perl -MDate::Parse -ne 'chomp; print str2time($_), "\n";';
-}
-export -f date2epoch
+epoch2date(){ (alias; declare -f) | echo "$@" | perl -ne 'chomp; my @in = split /\s+/, $_; map { my $out = ( $_ =~ m/^(\d{1,10})\d*$/ ) ? scalar localtime($1) : "Invalid time format ($in)- not epoch seconds."; print "$out\n" } @in;'; }
+
+date2epoch(){ (alias; declare -f) | echo "$@" | perl -MDate::Parse -ne 'chomp; print str2time($_), "\n";'; }
 
 fileintoclipmac () {
     cat $1 | pbcopy
+}
+
+# fh - repeat history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }

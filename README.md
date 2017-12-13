@@ -4,7 +4,14 @@
 
 ```
 git clone git://github.com/wyantb/Settings.git $HOME/.dotfiles
-echo "[[ -f $HOME/.dotfiles/bashrc ]] && . $HOME/.dotfiles/bashrc" >> $HOME/.bashrc
+
+# Install ZSH - brew install, or sudo apt-get install zsh
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# This actually needs to go before the line for oh-my-zsh sourcing itself, so move it once done
+echo "[ -f $HOME/.dotfiles/zshrc ] && source $HOME/.dotfiles/zshrc" >> $HOME/.zshrc
+
 ln -s $HOME/.dotfiles/vimrc $HOME/.vimrc
 ln -s $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
 ln -s $HOME/.dotfiles/profile $HOME/.profile
