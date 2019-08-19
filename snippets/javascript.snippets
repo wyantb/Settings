@@ -83,3 +83,18 @@ endsnippet
 snippet qunitDeepEqual
 assert.deepEqual(${1:actual}, ${2:expected}${3:, '$4'});
 endsnippet
+
+snippet snapshotTest
+/* eslint-env jest */
+
+import React from 'react'
+import renderer from 'react-test-renderer'
+import { $1 } from './$1'
+
+it('renders appropriately', () => {
+  const component = renderer.create(<$1
+  />)
+  const tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
+})
+endsnippet

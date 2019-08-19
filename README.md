@@ -15,7 +15,10 @@ echo "[ -f $HOME/.dotfiles/zshrc ] && source $HOME/.dotfiles/zshrc" >> $HOME/.zs
 # And install theme:
 ln -s $DOTFILES_HOME/main.zsh-theme ~/.oh-my-zsh/themes/main.zsh-theme
 
+# Basic config symlinks
 ln -s $HOME/.dotfiles/vimrc $HOME/.vimrc
+mkdir -p $HOME/.config/nvim
+ln -s $HOME/.dotfiles/vimrc $HOME/.config/nvim/init.vim
 ln -s $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
 ln -s $HOME/.dotfiles/profile $HOME/.profile
 ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig

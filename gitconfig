@@ -14,6 +14,7 @@
 	br = branch
 	sub = submodule
 	su = submodule update --init --recursive
+	rpo = remote prune origin
 	slog = log --pretty=format:\"%h %ad | %d %s [%an]\" --date=short
 	hist = log --pretty=format:\"%h %ad | %d %s [%an]\" --graph --date=short
 	hists = log --pretty=format:\"%h %ad | %d [%an]\" --graph --date=short
@@ -41,7 +42,7 @@
 	algorithm = patience
 
 [core]
-	editor = vim
+	editor = vim -u NONE -N
 	excludesfile = ~/.dotfiles/gitignore
 	autocrlf = input
 
@@ -79,3 +80,5 @@
 
 [mergetool]
 	keepBackup = false
+[pager]
+	br = false

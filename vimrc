@@ -20,6 +20,20 @@ Plugin 'tpope/vim-commentary'
 
 " Popup as you go autocomplete
 Plugin 'Valloric/YouCompleteMe'
+let g:ycm_filetype_whitelist = {'vim': 1, 'ruby': 1, 'eruby': 1, 'javascript.jsx': 1}
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'qf': 1,
+      \ 'notes': 1,
+      \ 'markdown': 1,
+      \ 'unite': 1,
+      \ 'text': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'mail': 1,
+      \ 'gitcommit': 1
+      \}
 
 " Snippets, snippets, snippets
 Plugin 'SirVer/ultisnips'
@@ -32,10 +46,28 @@ let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 let g:UltiSnipsSnippetsDir=$HOME."/.dotfiles/snippets"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.dotfiles/snippets"]
 
+" Ruby
+" Syntax checking w/ rubocop for teh ruby
+Plugin 'neomake/neomake'
+Plugin 'vim-ruby/vim-ruby'
+
+" R
+Plugin 'vim-scripts/Vim-R-plugin'
+
+runtime macros/matchit.vim
+
+" Typescript
+Plugin 'leafgarland/typescript-vim'
+
+" Easier to toggle list made by neomake
+Plugin 'milkypostman/vim-togglelist'
+
 " Better basic syntax for javascript
 Plugin 'jelera/vim-javascript-syntax'
 " And better indentation, highlighting
 Plugin 'pangloss/vim-javascript'
+" And jsx, naturally
+Plugin 'mxw/vim-jsx'
 " Syntax for mustache too
 Plugin 'mustache/vim-mustache-handlebars'
 
@@ -109,13 +141,14 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'glts/vim-textobj-comment'
 " try: ci_, da_
 Plugin 'lucapette/vim-textobj-underscore'
-" i, a, for function params
+" i, a, | for function params
 Plugin 'sgur/vim-textobj-parameter'
-" i/ a/ for the last search (remember dot formula: n. n. n.)
+" i/ a/ | for the last search (remember dot formula: n. n. n.)
 Plugin 'kana/vim-textobj-lastpat'
-" ie ae for whole buffer - hey, ya never know...
+" ie ae | for whole buffer - hey, ya never know...
 Plugin 'kana/vim-textobj-entire'
-
+" ir ar | for Ruby blocks
+Plugin 'nelstrom/vim-textobj-rubyblock'
 
 " highligts best letters for fFtT on the current line
 Plugin 'unblevable/quick-scope'
@@ -145,14 +178,6 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 " Helpful when JSON goes all wrong
 Plugin 'elzr/vim-json'
 
-Plugin 'derekwyatt/vim-scala'
-
-" Syntax checking
-" Plugin 'scrooloose/syntastic'
-" Plugin 'mtscout6/syntastic-local-eslint.vim'
-
-" Plugin 'vim-scripts/swap-parameters'
-
 " What it says on the tin.  Handy enough
 Plugin 'kien/rainbow_parentheses.vim'
 
@@ -163,6 +188,13 @@ Plugin 'airblade/vim-gitgutter'
 " Uses ctags to display landmarks
 Plugin 'majutsushi/tagbar'
 nnoremap <Leader>t :TagbarToggle<CR>
+" And lets get path/tags working nicely w/ my gemfile and all
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-rails'
+
+" Multi-cursor support???
+Plugin 'mg979/vim-visual-multi'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -174,6 +206,10 @@ if has("persistent_undo")
     set undofile
 endif
 
+" Setup async syntax checking with rubocop etc
+call neomake#configure#automake('rw', 1000)
+"let g:neomake_open_list = 2
+
 " The basics
 set nocompatible
 syntax on
@@ -183,19 +219,16 @@ set number
 " from the statusline)
 set mouse=
 
+if has("nvim")
+  set inccommand=nosplit
+endif
+
 " Search stuffs
 set hlsearch    " highlight searches
 set incsearch   " do incremental searching
 set showmatch   " jump to matches when entering regexp
 set ignorecase  " ignore case when searching
 set smartcase   " no ignorecase if Uppercase char present
-
-" Hookup syntastic
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " Clear highlighted search when redrawing screen, without moving cursor
 nnoremap <CR> :nohls<CR>
@@ -257,6 +290,14 @@ command! RealTab call RealTab()
 autocmd FileType make setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType go   setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+
+" Do it manually to start
+set autoindent
+set expandtab
+set softtabstop=2
+set ts=2
+set sw=2
 
 " Sometimes, you have some insane file that you need to open, and you really,
 " really don't want syntax highlighting and stuff hosing your system
@@ -280,13 +321,6 @@ command! OptimizeSpeed call OptimizeSpeed()
 command! OptimizeDefault call OptimizeDefault()
 
 command! FormatJSON %!python -m json.tool
-
-" Do it manually to start
-set autoindent
-set expandtab
-set softtabstop=4
-set ts=4
-set sw=4
 
 " Make backspance handle everything it should
 set backspace=indent,eol,start
@@ -355,9 +389,11 @@ autocmd BufLeave Gruntfile.js             normal! mG
 autocmd BufLeave *.xml                    normal! mX
 autocmd BufLeave build.xml                normal! mB
 autocmd BufLeave *.properties             normal! mP
-autocmd BufLeave vimrc,*.vim              normal! mR
+"autocmd BufLeave vimrc,*.vim              normal! mO
+autocmd BufLeave ruby                     normal! mR
 autocmd BufLeave *.java                   normal! mV
-autocmd BufLeave *.txt,*.text             normal! mT
+autocmd BufLeave *.txt,*.text             normal! mE
+autocmd BufLeave *.ts                     normal! mT
 
 " Easier trigger for repeating previously-used macro
 nnoremap <Leader>m @@
@@ -380,6 +416,12 @@ set t_Co=256
 set background=dark
 color harlequin-wyantb
 
+nmap <silent> <Leader>f :let @+ = expand("%")<cr>
+vmap <silent> <Leader>f :<c-u>let @+ = expand("%")<cr>
+
+nmap <silent> <Leader>w :terminal bundle exec rspec expand("%")<cr>
+vmap <silent> <Leader>w :<c-u>terminal bundle exec rspec expand("%")<cr>
+
 " Empty out trailing whitespace on save (nice w/ my snippets that may introduce
 " spaces)
 function! TrimTrailingWhitespace()
@@ -391,7 +433,7 @@ function! TrimTrailingWhitespace()
     call cursor(l, c) " and go back to original pos
 endfunction
 command! TrimTrailingWhitespace call TrimTrailingWhitespace()
-autocmd FileType c,cpp,java,php,javascript,html,less autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
+autocmd FileType c,cpp,java,php,javascript,html,less,ruby autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
 
 " Thanks, SO!  http://stackoverflow.com/a/29819201
 function! JscsFix()
@@ -560,7 +602,7 @@ nmap <silent> <Leader>Y :set opfunc=CopyFileLinesWithoutIndent<cr>g@
 vmap <silent> <Leader>Y :<c-u>call CopyFileLinesWithoutIndent( visualmode() )<CR>
 
 function! StripHome(inp)
-    return substitute(a:inp, '\/Users\/brianwyant\/', '', '')
+  return substitute(a:inp, '\/Users\/bwyant\/', '', '')
 endfunction
 
 function! CopyFileLinesForSnippet( type )
@@ -583,27 +625,6 @@ function! CopyFileLinesForSnippet( type )
 endfunction
 nmap <silent> <Leader>s :set opfunc=CopyFileLinesForSnippet<cr>g@
 vmap <silent> <Leader>s :<c-u>call CopyFileLinesForSnippet( visualmode() )<CR>
-
-function! CopyFileLinesForJiraSnippet( type )
-  if ( len( a:type ) == 1 )
-    let lineStart = line( "'<" )
-    let lineEnd   = line( "'>" )
-  else
-    let lineStart = line( "'[" )
-    let lineEnd   = line( "']" )
-  endif
-  let info = StripHome( expand( "%:p" ) )
-  if ( lineEnd - lineStart == 0 )
-    let info .= ', line ' . lineStart . ':'
-  else
-    let info .= ', lines ' . lineStart . '-' . lineEnd . ':'
-  endif
-  let lines = GetLinesWithoutIndent( lineStart, lineEnd )
-  let joinedLines = join( [ '{code}',  join( lines, "\<NL>" ), '{code}' ], "\<NL>" )
-  let @+ = join( [ info, "", joinedLines ], "\<NL>" )
-endfunction
-nmap <silent> <Leader>j :set opfunc=CopyFileLinesForJiraSnippet<cr>g@
-vmap <silent> <Leader>j :<c-u>call CopyFileLinesForJiraSnippet( visualmode() )<CR>
 
 " From Salman: commands for converting text to have spaces, ALL_CAPS,
 " dash-joins, etc
