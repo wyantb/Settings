@@ -10,6 +10,7 @@ ZSH_THEME="main"
 [ -f $DOTFILES_HOME/aliases ] && source ~/.dotfiles/aliases
 [ -f $DOTFILES_HOME/aliases_private ] && source ~/.dotfiles/aliases_private
 [ -f $DOTFILES_HOME/tig-completion.zsh ] && source $DOTFILES_HOME/tig-completion.zsh
+PATH="$PATH:$HOME/bin"
 
 ##############################################################################
 # History Configuration

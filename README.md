@@ -35,10 +35,18 @@ ln -s $HOME/.vim nvim
 mkdir -p $HOME/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim -c PluginInstall!
+cd ~/.vim/bundle/YouCompleteMe
+./install.py --clang-completer
 
 # Installing fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+```
+
+### Mac-specific
+```
+brew install cmake
+brew install reattach-to-user-namespace
 ```
 
 ### Hooks for a given repo
