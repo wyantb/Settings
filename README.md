@@ -5,6 +5,8 @@
 ```
 git clone git://github.com/wyantb/Settings.git $HOME/.dotfiles
 
+ln -s $HOME/.dotfiles/nvimrc $HOME/.nvimrc
+
 # Install ZSH - brew install, or sudo apt-get install zsh
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -16,13 +18,18 @@ echo "[ -f $HOME/.dotfiles/zshrc ] && source $HOME/.dotfiles/zshrc" >> $HOME/.zs
 ln -s $DOTFILES_HOME/main.zsh-theme ~/.oh-my-zsh/themes/main.zsh-theme
 
 # Basic config symlinks
-ln -s $HOME/.dotfiles/vimrc $HOME/.vimrc
 mkdir -p $HOME/.config/nvim
 ln -s $HOME/.dotfiles/vimrc $HOME/.config/nvim/init.vim
 ln -s $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
 ln -s $HOME/.dotfiles/profile $HOME/.profile
 ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig
 ln -s $HOME/.dotfiles/hgrc $HOME/.hgrc
+
+# Nvim added steps; optional if not using neovim, obv
+mkdir -p $HOME/.config/nvim
+cd $HOME/.config/nvim
+ln -s $HOME/.dotfiles/vimrc init.vim
+ln -s $HOME/.vim nvim
 
 # Plugin manager, and getting it ready:
 mkdir -p $HOME/.vim/bundle
@@ -44,7 +51,7 @@ ln -s $HOME/.dotfiles/scripts/pre-push-tweet.py .git/hooks/pre-push
 ## Uninstalling
 
 ```
-rm $HOME/.vimrc
+rm $HOME/.nvimrc
 rm $HOME/.tmux.conf
 rm $HOME/.profile
 rm $HOME/.gitconfig

@@ -10,6 +10,8 @@ files_to_644() {
     find /opt/lampp/htdocs -type f -exec chmod 644 {} \;
 }
 
+alias vim=nvim
+
 alias cls='clear; ls'
 alias sadd='ssh-add'
 alias serve='sudo nginx'
