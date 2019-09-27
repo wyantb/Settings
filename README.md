@@ -45,6 +45,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 ### Mac-specific
 ```
+brew install ag
 brew install cmake
 brew install reattach-to-user-namespace
 ```

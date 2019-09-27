@@ -20,7 +20,7 @@ Plugin 'tpope/vim-commentary'
 
 " Popup as you go autocomplete
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_filetype_whitelist = {'vim': 1, 'ruby': 1, 'eruby': 1, 'javascript.jsx': 1}
+let g:ycm_filetype_whitelist = {'vim': 1, 'javascript.jsx': 1}
 let g:ycm_filetype_blacklist = {
       \ 'tagbar': 1,
       \ 'qf': 1,
@@ -46,10 +46,8 @@ let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 let g:UltiSnipsSnippetsDir=$HOME."/.dotfiles/snippets"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.dotfiles/snippets"]
 
-" Ruby
-" Syntax checking w/ rubocop for teh ruby
+" Syntax checking w/ rubocop for teh
 Plugin 'neomake/neomake'
-Plugin 'vim-ruby/vim-ruby'
 
 " R
 Plugin 'vim-scripts/Vim-R-plugin'
@@ -147,8 +145,6 @@ Plugin 'sgur/vim-textobj-parameter'
 Plugin 'kana/vim-textobj-lastpat'
 " ie ae | for whole buffer - hey, ya never know...
 Plugin 'kana/vim-textobj-entire'
-" ir ar | for Ruby blocks
-Plugin 'nelstrom/vim-textobj-rubyblock'
 
 " highligts best letters for fFtT on the current line
 Plugin 'unblevable/quick-scope'
@@ -169,6 +165,8 @@ Plugin 'tpope/vim-unimpaired'
 
 " :Ack, which uses ag
 Plugin 'wincent/ferret'
+" :Ags, which uses ag
+Plugin 'gabesoft/vim-ags'
 
 " Visual representation of undo graph
 " Toggle w/ :UndotreeToggle
@@ -199,6 +197,18 @@ Plugin 'mg979/vim-visual-multi'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:ags_agexe = 'rg'
+let g:ags_agargs = {
+  \ '--column'         : ['', ''],
+  \ '--line-number'    : ['', ''],
+  \ '--context'        : ['g:ags_agcontext', '-C'],
+  \ '--max-count'      : ['g:ags_agmaxcount', ''],
+  \ '--heading'        : ['',''],
+  \ '--smart-case'     : ['','-S'],
+  \ '--color'          : ['always',''],
+  \ '--colors'         : [['match:fg:green', 'match:bg:black', 'match:style:nobold', 'path:fg:red', 'path:style:bold', 'line:fg:black', 'line:style:bold'] ,''],
+  \ }
 
 " Undo tweaks, assuming undotree plugin
 if has("persistent_undo")
@@ -290,7 +300,6 @@ command! RealTab call RealTab()
 autocmd FileType make setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType go   setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 
 " Do it manually to start
 set autoindent
@@ -390,7 +399,6 @@ autocmd BufLeave *.xml                    normal! mX
 autocmd BufLeave build.xml                normal! mB
 autocmd BufLeave *.properties             normal! mP
 "autocmd BufLeave vimrc,*.vim              normal! mO
-autocmd BufLeave ruby                     normal! mR
 autocmd BufLeave *.java                   normal! mV
 autocmd BufLeave *.txt,*.text             normal! mE
 autocmd BufLeave *.ts                     normal! mT
@@ -433,7 +441,7 @@ function! TrimTrailingWhitespace()
     call cursor(l, c) " and go back to original pos
 endfunction
 command! TrimTrailingWhitespace call TrimTrailingWhitespace()
-autocmd FileType c,cpp,java,php,javascript,html,less,ruby autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
+autocmd FileType c,cpp,java,php,javascript,html,less autocmd BufWritePre <buffer> :call TrimTrailingWhitespace()
 
 " Thanks, SO!  http://stackoverflow.com/a/29819201
 function! JscsFix()
@@ -602,7 +610,7 @@ nmap <silent> <Leader>Y :set opfunc=CopyFileLinesWithoutIndent<cr>g@
 vmap <silent> <Leader>Y :<c-u>call CopyFileLinesWithoutIndent( visualmode() )<CR>
 
 function! StripHome(inp)
-  return substitute(a:inp, '\/Users\/bwyant\/', '', '')
+  return substitute(a:inp, '\/Users\/brianwyant\/', '~/', '')
 endfunction
 
 function! CopyFileLinesForSnippet( type )
