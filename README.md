@@ -3,16 +3,19 @@
 ## Installing
 
 ```
-git clone git://github.com/wyantb/Settings.git $HOME/.dotfiles
+git clone git@github.com:wyantb/Settings.git $HOME/.dotfiles
 
 ln -s $HOME/.dotfiles/nvimrc $HOME/.nvimrc
 
 # Install ZSH - brew install, or sudo apt-get install zsh
 chsh -s $(which zsh)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # This actually needs to go before the line for oh-my-zsh sourcing itself, so move it once done
 echo "[ -f $HOME/.dotfiles/zshrc ] && source $HOME/.dotfiles/zshrc" >> $HOME/.zshrc
+
+# This can stay after oh-my-zsh sourcing
+echo "ZSH_THEME=\"main\"" >> $HOME/.zshrc
 
 # And install theme:
 ln -s $DOTFILES_HOME/main.zsh-theme ~/.oh-my-zsh/themes/main.zsh-theme
@@ -27,9 +30,12 @@ ln -s $HOME/.dotfiles/hgrc $HOME/.hgrc
 
 # Nvim added steps; optional if not using neovim, obv
 mkdir -p $HOME/.config/nvim
-cd $HOME/.config/nvim
-ln -s $HOME/.dotfiles/vimrc init.vim
-ln -s $HOME/.vim nvim
+ln -s $HOME/.dotfiles/vimrc $HOME/.config/nvim/init.vim
+ln -s $HOME/.vim $HOME/.config/nvim/nvim
+
+# if using flatpak:
+mkdir $HOME/.var/app/io.neovim.nvim/config/nvim/
+ln -s $HOME/.dotfiles/vimrc  $HOME/.var/app/io.neovim.nvim/config/nvim/init.vim
 
 # Plugin manager, and getting it ready:
 mkdir -p $HOME/.vim/bundle
