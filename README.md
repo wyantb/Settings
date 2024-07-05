@@ -33,9 +33,9 @@ mkdir -p $HOME/.config/nvim
 ln -s $HOME/.dotfiles/vimrc $HOME/.config/nvim/init.vim
 ln -s $HOME/.vim $HOME/.config/nvim/nvim
 
-# if using flatpak:
-mkdir $HOME/.var/app/io.neovim.nvim/config/nvim/
-ln -s $HOME/.dotfiles/vimrc  $HOME/.var/app/io.neovim.nvim/config/nvim/init.vim
+# if using flatpak (probably bad idea, can't exec shared bins):
+#mkdir $HOME/.var/app/io.neovim.nvim/config/nvim/
+#ln -s $HOME/.dotfiles/vimrc  $HOME/.var/app/io.neovim.nvim/config/nvim/init.vim
 
 # Plugin manager, and getting it ready:
 mkdir -p $HOME/.vim/bundle
@@ -43,6 +43,10 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim -c PluginInstall!
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py --clang-completer
+
+# Preparing WakaTime (optional)
+echo "Plugin 'wakatime/vim-wakatime'" >> $HOME/.dotfiles/vimrc
+# then restart
 
 # Installing fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

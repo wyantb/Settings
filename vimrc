@@ -20,7 +20,7 @@ Plugin 'tpope/vim-commentary'
 
 " Popup as you go autocomplete
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_filetype_whitelist = {'vim': 1, 'javascript.jsx': 1}
+let g:ycm_filetype_whitelist = {'vim': 1, 'javascript': 1, 'javascript.jsx': 1}
 let g:ycm_filetype_blacklist = {
       \ 'tagbar': 1,
       \ 'qf': 1,
@@ -90,7 +90,7 @@ let g:sneak#streak = 1
 " Replaces s with the 'surround' movement
 Plugin 'tpope/vim-surround'
 
-" I like :Gblame
+" I like :Gblame, now :Git blame -w
 Plugin 'tpope/vim-fugitive'
 
 " A few small supplements to netrw
@@ -165,6 +165,7 @@ Plugin 'tpope/vim-unimpaired'
 
 " :Ack, which uses ag
 Plugin 'wincent/ferret'
+
 " :Ags, which uses ag
 Plugin 'gabesoft/vim-ags'
 
@@ -193,6 +194,8 @@ Plugin 'tpope/vim-rails'
 
 " Multi-cursor support???
 Plugin 'mg979/vim-visual-multi'
+
+Plugin 'wakatime/vim-wakatime'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -300,6 +303,8 @@ command! RealTab call RealTab()
 autocmd FileType make setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType go   setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType java setlocal ts=2 sts=0 sw=2 noexpandtab
+autocmd FileType groovy setlocal ts=2 sts=0 sw=2 noexpandtab
 
 " Do it manually to start
 set autoindent
@@ -376,7 +381,7 @@ set statusline+=Lin:\ \%l\/\%L " line number/total
 set statusline+=\              " ends with whitespace
 
 " Reload vimrc
-map <Leader>v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloaded'"<CR>
+map <Leader>v :source ~/.dotfiles/vimrc<CR>:filetype detect<CR>:exe ":echo '\nvimrc reloaded'"<CR>
 
 " Somewhat destructive, but I don't use marks much, so I think I can afford making
 " jumps to marks a little bit more keypress to get to
@@ -427,8 +432,8 @@ color harlequin-wyantb
 nmap <silent> <Leader>f :let @+ = expand("%")<cr>
 vmap <silent> <Leader>f :<c-u>let @+ = expand("%")<cr>
 
-nmap <silent> <Leader>w :terminal bundle exec rspec expand("%")<cr>
-vmap <silent> <Leader>w :<c-u>terminal bundle exec rspec expand("%")<cr>
+" nmap <silent> <Leader>w :terminal bundle exec rspec expand("%")<cr>
+" vmap <silent> <Leader>w :<c-u>terminal bundle exec rspec expand("%")<cr>
 
 " Empty out trailing whitespace on save (nice w/ my snippets that may introduce
 " spaces)

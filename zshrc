@@ -11,6 +11,8 @@ export plugins=(git osx)
 [ -f $DOTFILES_HOME/aliases_private ] && source ~/.dotfiles/aliases_private
 [ -f $DOTFILES_HOME/tig-completion.zsh ] && source $DOTFILES_HOME/tig-completion.zsh
 [ -d $HOME/flatrun ] && export PATH="$PATH:$HOME/flatrun"
+[ -d $HOME/flatrun/idea/bin ] && export PATH="$PATH:$HOME/flatrun/idea/bin"
+[ -d $HOME/gradle ] && export PATH="$PATH:$HOME/gradle"
 PATH="$PATH:$HOME/bin"
 
 export NVM_DIR="$HOME/.nvm"
