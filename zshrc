@@ -2,7 +2,7 @@
 export DOTFILES_HOME=$HOME/.dotfiles
 
 fpath=(/usr/local/share/zsh-completions $fpath)
-export plugins=(git osx)
+export plugins=(git)
 #ZSH_THEME="main"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

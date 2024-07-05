@@ -74,9 +74,9 @@ Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
 " http://ternjs.net/ explains better than I can
-Plugin 'marijnh/tern_for_vim'
-nnoremap <Leader>g :TernDef<CR>
-nnoremap <Leader>r :TernRefs<CR>
+" Plugin 'marijnh/tern_for_vim'
+" nnoremap <Leader>g :TernDef<CR>
+" nnoremap <Leader>r :TernRefs<CR>
 
 " Allows for repeating of plugin movement keys (sneak, surround)
 Plugin 'tpope/vim-repeat'
@@ -99,30 +99,6 @@ Plugin 'tpope/vim-vinegar'
 
 " Ctrl-direction can navigate either vim or tmux splits
 Plugin 'christoomey/vim-tmux-navigator'
-
-" CtrlP - Awesome show-as-you-type file searching
-Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|yuidoc|projects\/war\/war|projects\/pages\/reports|javascripts-min|javascripts-prod|javascripts-min-prod|3rdparty|swagger_scripts|licenses|classes|assets\/dist|projects\/adminwar\/war)$',
-  \ 'file': '\v\.(exe|so|dll|class|orig|swp)$',
-  \ 'link': '',
-  \ }
-
-" Faster CtrlP matching
-" http://blog.patspam.com/2014/super-fast-ctrlp
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ --ignore node_modules
-      \ --ignore .class
-      \ -g ""'
-
-" Faster CtrlP matching
-Plugin 'FelikZ/ctrlp-py-matcher'
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " My colorscheme
 "  forked from: Plugin 'nielsmadan/harlequin'
@@ -157,6 +133,7 @@ Plugin 'Blackrush/vim-gocode'
 " fzf, find stuff https://github.com/junegunn/fzf
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+let FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
 nnoremap <Leader>p :FZF<CR>
 
 " async, for ferret, and then aliases for easier quickfix usage
@@ -201,7 +178,7 @@ Plugin 'wakatime/vim-wakatime'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-let g:ags_agexe = 'rg'
+let g:ags_agexe = '/usr/bin/ag'
 let g:ags_agargs = {
   \ '--column'         : ['', ''],
   \ '--line-number'    : ['', ''],
